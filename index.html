@@ -651,8 +651,16 @@ const EPOCH = new Date('2026-07-01T00:00:00+08:00').getTime();
   const box = document.getElementById("uplog");
   const fail = ()=>{ box.innerHTML = '<li><div class="up-body"><p>公告載入失敗，請點下方連結到 GitHub 查看。</p></div></li>'; };
   try{
-    const res = await fetch("https://raw.githubusercontent.com/s878787-code/line-trip_web/main/README.md", {cache:"no-store"});
-    if(!res.ok) throw 0;
+    /* 來源順序:同網域的 README(Pages 佈署,無限流)→ GitHub API 備援 */
+    const SOURCES = ["README.md", "https://api.github.com/repos/s878787-code/line-trip_web/readme"];
+    let res = null;
+    for (const u of SOURCES){
+      try{
+        const r = await fetch(u, {cache:"no-store", headers:{Accept:"application/vnd.github.raw"}});
+        if (r.ok){ res = r; break; }
+      }catch(e){}
+    }
+    if(!res) throw 0;
     const md = (await res.text()).replace(/\r/g,"").replace(/<!--[\s\S]*?-->/g,"");
     const sec = md.split(/\n## /).find(s=>s.includes("更新紀錄"));
     if(!sec) throw 0;
