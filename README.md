@@ -2,7 +2,7 @@
 
 <img src="assets/app-icon.png" width="88" alt="TripRadar App Icon">
 
-# TripRadar 車趟輔助 — 更新公告
+# TripRadar 車趟雷達 — 更新公告
 
 職業司機的 AI 接單助手。官方網站:**[s878787-code.github.io/line-trip_web](https://s878787-code.github.io/line-trip_web/)**
 

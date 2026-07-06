@@ -2,92 +2,60 @@
 <html lang="zh-Hant-TW">
 <head>
 <meta charset="UTF-8">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500;700;900&family=Sora:wght@700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet">
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
   html,body{width:1200px;height:630px;overflow:hidden}
-  body{
-    position:relative;background:#0A0E12;color:#F2F6F8;
-    font-family:'Noto Sans TC','Sora',sans-serif;
-    background-image:
-      radial-gradient(620px 440px at 88% -10%,rgba(255,138,43,.28),transparent 60%),
-      radial-gradient(560px 520px at 4% 6%,rgba(255,178,62,.20),transparent 62%),
-      radial-gradient(700px 500px at 60% 120%,rgba(6,199,85,.08),transparent 60%);
-  }
-  .grid{position:absolute;inset:0;opacity:.06;
-    background-image:linear-gradient(rgba(255,255,255,.6) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.6) 1px,transparent 1px);
-    background-size:48px 48px;mask-image:radial-gradient(circle at 70% 40%,#000,transparent 75%)}
-  .pad{position:absolute;inset:0;padding:66px 72px;display:flex;flex-direction:column;justify-content:space-between}
+  :root{--cab:#FFB23E;--ink:#141008;--cond:"Barlow Condensed",sans-serif;--font:"Noto Sans TC",sans-serif}
+  body{position:relative;background:var(--cab);color:var(--ink);font-family:var(--font)}
+  /* 上下計程車格紋帶 */
+  .checker{position:absolute;left:0;right:0;height:26px;background:repeating-conic-gradient(var(--ink) 0% 25%,var(--cab) 0% 50%) 0 0/26px 26px}
+  .checker.top{top:0}.checker.bot{bottom:0}
+  .pad{position:absolute;inset:26px 0;display:flex;align-items:center}
+  .left{flex:1;padding:0 0 0 72px}
+  .right{width:396px;display:flex;align-items:center;justify-content:center}
 
-  .brand{display:flex;align-items:center;gap:16px}
-  .mark{filter:drop-shadow(0 0 14px rgba(255,178,62,.5))}
-  .brand .wm{font-family:'Sora',sans-serif;font-weight:800;font-size:34px;letter-spacing:-.5px}
-  .brand .wm .t{color:#FFB23E}
-  .brand .sub{font-size:16px;color:#93A4B0;letter-spacing:4px;margin-top:2px}
+  .brand{display:flex;align-items:center;gap:16px;margin-bottom:30px}
+  .brand img{width:66px;height:66px;border-radius:15px;box-shadow:6px 6px 0 rgba(20,16,8,.28)}
+  .brand .wm{font-weight:900;font-size:34px;letter-spacing:-.01em}
+  .brand .sub{font-size:17px;font-weight:700;color:#4A3708;letter-spacing:.02em;margin-top:2px}
 
-  .eyebrow{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;
-    font-size:19px;font-weight:700;color:#FFB23E;letter-spacing:3px;
-    background:rgba(255,178,62,.12);border:1px solid rgba(255,178,62,.32);
-    padding:9px 20px;border-radius:999px;margin-bottom:24px}
-  .eyebrow i{width:9px;height:9px;border-radius:50%;background:#FFB23E;box-shadow:0 0 12px #FFB23E;display:block}
-  h1{font-family:'Sora','Noto Sans TC',sans-serif;font-weight:900;font-size:74px;line-height:1.14;letter-spacing:-1px}
-  h1 .g{background:linear-gradient(100deg,#FFC760,#FFB23E 45%,#FF8A2B);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .desc{margin-top:26px;font-size:26px;color:#AEBcC6;color:#AEBEC8;font-weight:500}
+  .kicker{display:inline-block;background:var(--ink);color:var(--cab);font-weight:900;font-size:20px;
+    padding:9px 20px;border-radius:999px;box-shadow:5px 5px 0 rgba(20,16,8,.22);margin-bottom:24px}
+  h1{font-weight:900;font-size:70px;line-height:1.08;letter-spacing:-.02em}
+  h1 .u{background:var(--ink);color:var(--cab);padding:0 10px;border-radius:6px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+  .desc{margin-top:26px;font-size:24px;font-weight:700;color:#3A2C06}
 
-  .foot{display:flex;align-items:center;justify-content:space-between}
-  .chips{display:flex;gap:12px}
-  .chip{font-size:20px;font-weight:700;color:#CBD5Dc;color:#CBD5DC;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);padding:10px 20px;border-radius:12px}
-  .chip.hot{color:#FFB23E;border-color:rgba(255,178,62,.35);background:rgba(255,178,62,.1)}
-  .url{font-size:20px;color:#6B7E8B;font-family:'Sora',sans-serif;font-weight:700}
+  .chips{display:flex;gap:14px;margin-top:34px}
+  .chip{background:var(--ink);color:var(--cab);font-weight:900;font-size:20px;padding:11px 20px;border-radius:10px;box-shadow:4px 4px 0 rgba(20,16,8,.22)}
 
-  .radar{position:absolute;right:-90px;top:190px;width:560px;height:560px;opacity:.9}
+  /* 右側:黑框大 App icon 車頂招牌 */
+  .tile{width:300px;height:300px;border-radius:40px;background:var(--ink);display:flex;align-items:center;justify-content:center;
+    box-shadow:12px 12px 0 rgba(20,16,8,.25)}
+  .tile img{width:236px;height:236px;border-radius:30px}
 </style>
 </head>
 <body>
-  <!-- 大型雷達背景 -->
-  <svg class="radar" viewBox="0 0 560 560" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFC760"/><stop offset="1" stop-color="#FF8A2B"/></linearGradient>
-      <radialGradient id="rs" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#FFB23E" stop-opacity="0.42"/><stop offset="1" stop-color="#FFB23E" stop-opacity="0"/></radialGradient>
-    </defs>
-    <g transform="translate(280,280)">
-      <path d="M0 0 L235 -118 A263 263 0 0 1 250 70 Z" fill="url(#rs)"/>
-      <circle r="262" stroke="url(#rg)" stroke-width="3" opacity="0.9"/>
-      <circle r="196" stroke="#FFB23E" stroke-width="1.6" opacity="0.32"/>
-      <circle r="130" stroke="#FFB23E" stroke-width="1.6" opacity="0.24"/>
-      <circle r="64" stroke="#FFB23E" stroke-width="1.6" opacity="0.18"/>
-      <path d="M0 0 L246 -123" stroke="url(#rg)" stroke-width="3.4" stroke-linecap="round"/>
-      <circle r="6" fill="#FFB23E"/>
-      <circle cx="96" cy="104" r="10" fill="#06C755"/>
-      <circle cx="-120" cy="70" r="6" fill="#FFB23E" opacity="0.7"/>
-      <circle cx="150" cy="-40" r="5" fill="#FFB23E" opacity="0.6"/>
-    </g>
-  </svg>
-  <div class="grid"></div>
-
+  <div class="checker top"></div>
   <div class="pad">
-    <div class="brand">
-      <img class="mark" src="app-icon.png" width="64" height="64" style="border-radius:14px" alt="">
-      <div>
-        <div class="wm">Trip<span class="t">Radar</span></div>
-        <div class="sub">車趟輔助</div>
+    <div class="left">
+      <div class="brand">
+        <img src="app-icon.png" alt="">
+        <div><div class="wm">TripRadar</div><div class="sub">車趟雷達</div></div>
       </div>
-    </div>
-
-    <div>
-      <span class="eyebrow"><i></i>職業司機的 AI 接單助手</span>
-      <h1>不用一直刷 LINE，<br>車趟<span class="g">直接送到你眼前</span>。</h1>
-      <div class="desc">自動辨識 LINE 群組派單・整理上下車與距離 ETA・一鍵回覆</div>
-    </div>
-
-    <div class="foot">
+      <span class="kicker">白牌司機的 AI 接單助手</span>
+      <h1>不用一直刷 LINE，<br>車趟<span class="u">直接送到你眼前</span></h1>
+      <div class="desc">自動抓 LINE 派單・整理距離與到達時間・一鍵回覆</div>
       <div class="chips">
-        <span class="chip hot">前 100 名創始會員</span>
+        <span class="chip">前 100 名創始會員</span>
         <span class="chip">一天約 NT$20</span>
         <span class="chip">LINE @493watvi</span>
       </div>
-      <div class="url">s878787-code.github.io/line-trip_web</div>
+    </div>
+    <div class="right">
+      <div class="tile"><img src="app-icon.png" alt=""></div>
     </div>
   </div>
+  <div class="checker bot"></div>
 </body>
 </html>
