@@ -245,6 +245,19 @@
   .c-note{font-size:15px;color:var(--on-cab-mute);font-weight:500;max-width:26em}
   .c-note b{color:var(--ink)}
 
+  /* ── 版本更新(同步 GitHub README) ── */
+  .up-note{margin-top:14px;color:var(--on-ink-mute);font-size:15px;font-weight:500}
+  .uplog{margin-top:36px;list-style:none;display:grid;gap:0;max-width:640px;border-top:1px solid rgba(244,237,225,.16)}
+  .uplog>li{padding:18px 2px;border-bottom:1px solid rgba(244,237,225,.16)}
+  .up-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+  .up-v{font-family:var(--cond);font-weight:700;font-size:22px;color:var(--cab)}
+  .up-date{color:var(--on-ink-mute);font-size:13.5px;font-weight:500}
+  .up-body{margin-top:6px;display:grid;gap:4px}
+  .up-body p{font-size:15.5px;color:var(--on-ink);padding-left:16px;position:relative}
+  .up-body p::before{content:"・";position:absolute;left:0;color:var(--cab)}
+  .up-more{margin-top:22px;font-size:14.5px}
+  .up-more a{color:var(--cab);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+
   /* ── 尾聲 CTA(黑帶) ── */
   .final h2{font-size:clamp(30px,5.6vw,54px)}
   .final .lead{margin:18px 0 34px;color:var(--on-ink-mute);font-size:clamp(16px,2.2vw,19px);font-weight:500;max-width:26em}
@@ -284,7 +297,7 @@
       TripRadar <small>車趟輔助</small>
     </a>
     <nav class="nav-links" aria-label="頁內導覽">
-      <a href="#pain">司機痛點</a><a href="#how">怎麼運作</a><a href="#spec">功能</a><a href="#price">收費</a><a href="#faq">常見問題</a>
+      <a href="#pain">司機痛點</a><a href="#how">怎麼運作</a><a href="#spec">功能</a><a href="#price">收費</a><a href="#faq">常見問題</a><a href="#updates">更新</a>
     </nav>
     <a class="btn btn-cab" href="#price">立即體驗</a>
   </div>
@@ -504,6 +517,18 @@
   </div>
 </section>
 
+<div class="checker" role="presentation"></div>
+
+<!-- ═══ 版本更新:黑帶(即時同步 GitHub README) ═══ -->
+<section class="band band-ink" id="updates">
+  <div class="wrap">
+    <h2 class="rise">版本更新</h2>
+    <p class="up-note">App 有新版本，這裡即時同步官方公告。</p>
+    <ol class="uplog" id="uplog"><li><div class="up-body"><p>公告載入中…</p></div></li></ol>
+    <p class="up-more"><a href="https://github.com/s878787-code/line-trip_web#readme" target="_blank" rel="noopener">查看完整更新公告 →</a></p>
+  </div>
+</section>
+
 <!-- ═══ 尾聲:黑帶 ═══ -->
 <section class="band band-ink final">
   <div class="wrap">
@@ -619,6 +644,30 @@ const EPOCH = new Date('2026-07-01T00:00:00+08:00').getTime();
     bar.setAttribute("aria-hidden", String(!(past && !inP)));
   };
   addEventListener("scroll", upd, {passive:true}); upd();
+})();
+
+/* 版本更新:即時抓 GitHub README 的「更新紀錄」區 */
+(async function(){
+  const box = document.getElementById("uplog");
+  const fail = ()=>{ box.innerHTML = '<li><div class="up-body"><p>公告載入失敗，請點下方連結到 GitHub 查看。</p></div></li>'; };
+  try{
+    const res = await fetch("https://raw.githubusercontent.com/s878787-code/line-trip_web/main/README.md", {cache:"no-store"});
+    if(!res.ok) throw 0;
+    const md = (await res.text()).replace(/\r/g,"").replace(/<!--[\s\S]*?-->/g,"");
+    const sec = md.split(/\n## /).find(s=>s.includes("更新紀錄"));
+    if(!sec) throw 0;
+    const esc  = t=>t.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+    const bold = t=>esc(t).replace(/\*\*(.+?)\*\*/g,"<b>$1</b>");
+    const entries = [...sec.matchAll(/^### (.+)\n((?:- .*\n?)*)/gm)].slice(0,5);
+    if(!entries.length) throw 0;
+    box.innerHTML = entries.map(m=>{
+      const t  = m[1].replace(/^🚀\s*/,"").trim();
+      const mm = t.match(/^(.+?)[（(](.+?)[)）]\s*$/);
+      const v  = esc(mm ? mm[1].trim() : t), d = mm ? esc(mm[2].trim()) : "";
+      const items = [...m[2].matchAll(/^- +(.*)$/gm)].map(x=>`<p>${bold(x[1])}</p>`).join("");
+      return `<li><div class="up-head"><span class="up-v">${v}</span><span class="up-date">${d}</span></div><div class="up-body">${items}</div></li>`;
+    }).join("");
+  }catch(e){ fail(); }
 })();
 
 /* 複製 LINE ID */
