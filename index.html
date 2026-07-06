@@ -188,7 +188,10 @@
   .rung{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:15px 20px;border:2px solid var(--ink);border-radius:10px;font-size:16px;font-weight:700;background:rgba(255,255,255,.22)}
   .rung .price-sm{font-family:var(--cond);font-weight:700;font-size:22px}
   .rung .when{font-size:13px;padding:5px 13px;border-radius:999px;background:transparent;border:2px solid var(--ink-line);color:var(--on-cab-mute);font-weight:900;flex:none}
-  .rung.now{background:var(--ink);color:var(--cab);border-color:var(--ink);box-shadow:6px 6px 0 rgba(20,16,8,.25)}
+  .rung.now{background:var(--ink);color:var(--cab);border-color:var(--ink);box-shadow:6px 6px 0 rgba(20,16,8,.25);cursor:pointer;transition:transform .16s var(--ease),box-shadow .16s var(--ease)}
+  .rung.now:hover{transform:translate(-1px,-1px);box-shadow:8px 8px 0 rgba(20,16,8,.25)}
+  .rung.now:active{transform:translate(3px,3px);box-shadow:2px 2px 0 rgba(20,16,8,.25)}
+  .rung.now:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
   .rung.now .when{background:var(--cab);color:var(--ink);border-color:var(--cab)}
 
   .meters{display:grid;gap:22px;margin-top:48px;align-items:stretch}
@@ -440,7 +443,7 @@
     </div>
 
     <div class="ladder" aria-label="價格階梯:越晚加入越貴">
-      <div class="rung now"><span>前 100 名・首年</span><span style="display:flex;align-items:center;gap:14px"><span class="price-sm num">NT$7,990</span><span class="when">現在</span></span></div>
+      <a class="rung now" href="#contact" aria-label="立即加入創始會員，前 100 名首年 NT$7,990"><span>前 100 名・首年</span><span style="display:flex;align-items:center;gap:14px"><span class="price-sm num">NT$7,990</span><span class="when">現在 →</span></span></a>
       <div class="rung"><span>第 101 名起・首年</span><span style="display:flex;align-items:center;gap:14px"><span class="price-sm num">NT$9,990</span><span class="when">售完後</span></span></div>
       <div class="rung"><span>產品成熟後正式價</span><span style="display:flex;align-items:center;gap:14px"><span class="price-sm num">NT$11,990</span><span class="when">未來</span></span></div>
     </div>
