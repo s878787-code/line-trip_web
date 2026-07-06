@@ -4,768 +4,543 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>TripRadar 車趟輔助 — 不用一直刷 LINE，真正的車趟直接送到你眼前</title>
-<meta name="description" content="TripRadar 車趟輔助 — 職業司機的 AI 接單助手。自動辨識 LINE 群組派單、整理上下車、距離與預計抵達時間、一鍵跳回群組標記派單人。每天少滑 2 小時 LINE，多接幾張車趟。">
+<meta name="description" content="TripRadar 車趟輔助 — 白牌司機的 AI 接單助手。自動辨識 LINE 群組派單、整理上下車、距離與預計抵達時間、一鍵跳回群組標記派單人。少空等、少漏單、多跑趟。">
 <meta property="og:title" content="TripRadar 車趟輔助 — 不用一直刷 LINE，真正的車趟直接送到你眼前">
-<meta property="og:description" content="前 100 名創始會員首年 NT$7,990，NT$599 解鎖 30 天完整體驗、可全額折抵。自動辨識 LINE 群組派單、整理上下車、距離與預計抵達時間、一鍵回覆。">
+<meta property="og:description" content="前 100 名創始會員首年 NT$7,990，NT$599 解鎖 30 天完整體驗、可全額折抵。自動辨識 LINE 群組派單、一鍵回覆。">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#0A0E12">
-<link rel="canonical" href="https://s878787-code.github.io/line-trip_web/">
-<link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
-<link rel="icon" href="assets/icon-192.png" sizes="192x192" type="image/png">
-<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <meta property="og:site_name" content="TripRadar 車趟輔助">
-<meta property="og:url" content="https://s878787-code.github.io/line-trip_web/">
 <meta property="og:image" content="https://s878787-code.github.io/line-trip_web/assets/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="TripRadar 車趟輔助 — 職業司機的 AI 接單助手">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#141008">
+<link rel="canonical" href="https://s878787-code.github.io/line-trip_web/">
+<meta property="og:url" content="https://s878787-code.github.io/line-trip_web/">
+<meta property="og:image:alt" content="TripRadar 車趟輔助 — 白牌司機的 AI 接單助手">
 <meta name="twitter:title" content="TripRadar 車趟輔助 — 不用一直刷 LINE，真正的車趟直接送到你眼前">
 <meta name="twitter:description" content="前 100 名創始會員首年 NT$7,990，NT$599 解鎖 30 天完整體驗、可全額折抵。">
 <meta name="twitter:image" content="https://s878787-code.github.io/line-trip_web/assets/og.png">
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="assets/icon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0E1013;
-    --surface:#15181D;
-    --surface-2:#1B1F25;
-    --line:rgba(255,255,255,.08);
-    --line-2:rgba(255,255,255,.16);
-    --text:#EAECEE;
-    --muted:#9BA2A9;
-    --faint:#6A727A;
-    --accent:#FFB23E;
-    --accent-2:#F5991C;
-    --accent-soft:rgba(255,178,62,.10);
-    --ink:#1A1204;
-    --green:#06C755;
-    --red:#E4695C;
-    --r:10px;
-    --r-sm:8px;
-    --ease:cubic-bezier(.4,0,.2,1);
-    --font:"Inter","Noto Sans TC","PingFang TC","Microsoft JhengHei",-apple-system,"Segoe UI",sans-serif;
-    --display:"Sora","Inter","Noto Sans TC",sans-serif;
+    /* 計程車塗裝雙色世界 */
+    --cab:#FFB23E;          /* 車身黃(品牌琥珀) */
+    --cab-press:#F5991C;    /* 按壓 */
+    --ink:#141008;          /* 烤漆黑(暖) */
+    --ink-2:#1E180C;        /* 黑帶內面板 */
+    --ink-line:rgba(20,16,8,.28);
+    --on-ink:#F4EDE1;       /* 黑底上的暖白 */
+    --on-ink-mute:#BDB29B;  /* 黑底次要字(7:1) */
+    --on-cab-mute:#4A3708;  /* 黃底次要字(同色相深棕,5.6:1) */
+    --paper:#FFFFFF;
+    --green:#06C755;        /* LINE 專用 */
+    --r:8px;
+    --ease:cubic-bezier(.16,1,.3,1); /* ease-out-expo 系 */
+    --font:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    --cond:"Barlow Condensed","Noto Sans TC","Arial Narrow",sans-serif;
+    /* z 階層 */
+    --z-sticky:30; --z-bar:40;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
   body{
-    background:var(--bg);color:var(--text);font-family:var(--font);
-    line-height:1.65;font-size:16px;-webkit-font-smoothing:antialiased;
-    overflow-x:hidden;position:relative;
+    background:var(--cab);color:var(--ink);
+    font-family:var(--font);font-size:16.5px;line-height:1.7;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden;
   }
-  /* 極克制的背景：純色 + 幾乎看不見的顆粒，無彩色光暈 */
-  body::after{
-    content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.35;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.03'/%3E%3C/svg%3E");
-  }
-  ::selection{background:var(--accent);color:var(--ink)}
+  ::selection{background:var(--ink);color:var(--cab)}
   img,video{max-width:100%;display:block}
   a{color:inherit;text-decoration:none}
-  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
-  section{padding:72px 0;position:relative}
-  @media(min-width:900px){section{padding:112px 0}}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 clamp(20px,4vw,32px)}
 
-  h1,h2,h3{font-family:var(--display);font-weight:800;letter-spacing:-.02em;line-height:1.15}
-  h1{font-size:clamp(33px,6.8vw,58px);line-height:1.08;letter-spacing:-.03em}
-  h2{font-size:clamp(25px,4.6vw,40px);margin-bottom:14px}
-  h3{font-size:18px;font-family:var(--font);font-weight:700;letter-spacing:-.01em}
-  .num{font-variant-numeric:tabular-nums;letter-spacing:-.01em}
-  .lead{color:var(--muted);font-size:clamp(15.5px,2.4vw,18px);max-width:34em;line-height:1.7}
-  em.hl{font-style:normal;color:var(--accent);font-weight:inherit}
-  .grad{color:var(--accent)}
-  .center{text-align:center}
-  .center .lead{margin-inline:auto}
+  h1,h2{font-weight:900;line-height:1.16;letter-spacing:-.015em;text-wrap:balance}
+  h1{font-size:clamp(34px,7vw,72px);line-height:1.06}
+  h2{font-size:clamp(27px,4.8vw,44px)}
+  p{text-wrap:pretty}
+  .num{font-family:var(--cond);font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:.01em}
 
-  /* 編輯式段落標籤：一段短橫線 + 字母加寬,無膠囊、無發光 */
-  .eyebrow{
-    display:inline-flex;align-items:center;gap:11px;
-    font-family:var(--display);font-size:12px;font-weight:700;
-    color:var(--accent);letter-spacing:.2em;text-transform:uppercase;
-    margin-bottom:20px;
-  }
-  .eyebrow::before{content:"";width:24px;height:1px;background:var(--accent);flex:none}
-  .center .eyebrow{justify-content:center}
+  /* ── 帶狀樂章:黃帶 / 黑帶 ── */
+  .band{padding:clamp(64px,9vw,116px) 0}
+  .band-ink{background:var(--ink);color:var(--on-ink)}
+  .band-ink ::selection{background:var(--cab);color:var(--ink)}
 
-  /* 按鈕：實心、平面、無漸層無光暈 */
+  /* 計程車格紋帶(簽名分隔) */
+  .checker{height:28px;background:repeating-conic-gradient(var(--ink) 0% 25%,var(--cab) 0% 50%) 0 0/28px 28px}
+
+  /* ── 按鈕:號誌牌硬邊 + 實體投影 ── */
   .btn{
-    display:inline-flex;align-items:center;justify-content:center;gap:8px;
-    font-weight:700;font-size:15.5px;border-radius:var(--r-sm);padding:14px 26px;
-    border:1px solid transparent;cursor:pointer;font-family:var(--font);white-space:nowrap;
-    transition:background .18s var(--ease),border-color .18s var(--ease),color .18s var(--ease);
+    display:inline-flex;align-items:center;justify-content:center;gap:10px;
+    font-weight:900;font-size:17px;font-family:var(--font);
+    padding:16px 30px;border-radius:var(--r);cursor:pointer;white-space:nowrap;
+    border:2.5px solid var(--ink);
+    transition:transform .16s var(--ease),box-shadow .16s var(--ease),background .16s;
   }
-  .btn-amber{background:var(--accent);color:var(--ink)}
-  .btn-amber:hover{background:var(--accent-2)}
-  .btn-ghost{background:transparent;color:var(--text);border-color:var(--line-2)}
-  .btn-ghost:hover{border-color:var(--text)}
-  .btn:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  .btn-ink{background:var(--ink);color:var(--cab);box-shadow:5px 5px 0 rgba(20,16,8,.35)}
+  .btn-ink:hover{transform:translate(-1px,-1px);box-shadow:7px 7px 0 rgba(20,16,8,.35)}
+  .btn-ink:active{transform:translate(3px,3px);box-shadow:1px 1px 0 rgba(20,16,8,.35)}
+  .btn-cab{background:var(--cab);color:var(--ink);border-color:var(--cab);box-shadow:5px 5px 0 rgba(255,178,62,.22)}
+  .btn-cab:hover{background:var(--cab-press);border-color:var(--cab-press);transform:translate(-1px,-1px);box-shadow:7px 7px 0 rgba(255,178,62,.22)}
+  .btn-cab:active{transform:translate(3px,3px);box-shadow:1px 1px 0 rgba(255,178,62,.22)}
+  .btn-hollow{background:transparent;color:var(--on-ink);border-color:var(--on-ink)}
+  .btn-hollow:hover{background:rgba(244,237,225,.08)}
+  .btn-hollow-ink{background:transparent;color:var(--ink);border-color:var(--ink);box-shadow:none}
+  .btn-hollow-ink:hover,.btn-hollow-ink:active{background:rgba(20,16,8,.08);transform:none;box-shadow:none}
+  .btn-line{background:var(--green);color:#fff;border-color:var(--green);box-shadow:none}
+  .btn-line:hover{background:#05B34C;border-color:#05B34C;transform:none}
+  .nav .btn:hover,.nav .btn:active,.stickybar .btn:hover,.stickybar .btn:active{transform:none;box-shadow:none}
+  .btn:focus-visible,a:focus-visible,summary:focus-visible,button:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+  .band-ink :focus-visible,header.nav :focus-visible,.stickybar :focus-visible{outline-color:var(--cab)}
 
-  /* 導覽:實心不透明,無毛玻璃 */
-  header.nav{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid transparent;transition:border-color .3s}
-  header.nav.scrolled{border-bottom-color:var(--line)}
-  .nav-in{display:flex;align-items:center;justify-content:space-between;height:64px}
-  .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;font-family:var(--display);letter-spacing:-.01em}
-  .logo small{font-size:12px;color:var(--muted);font-weight:400;font-family:var(--font);letter-spacing:0}
-  @media(max-width:400px){.logo small{display:none}}
-  .nav-links{display:none;gap:28px;font-size:14.5px;color:var(--muted);font-weight:500}
-  .nav-links a{transition:color .18s}
-  .nav-links a:hover{color:var(--text)}
+  /* ── 導覽(黑) ── */
+  header.nav{position:sticky;top:0;z-index:var(--z-bar);background:var(--ink);color:var(--on-ink);border-bottom:2px solid rgba(255,178,62,.35)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:62px;gap:12px}
+  .logo{display:flex;align-items:center;gap:11px;font-weight:900;font-size:18px}
+  .logo img{width:32px;height:32px;border-radius:8px}
+  .logo small{font-size:12px;color:var(--on-ink-mute);font-weight:500}
+  @media(max-width:420px){.logo small{display:none}}
+  .nav-links{display:none;gap:26px;font-size:15px;color:var(--on-ink-mute);font-weight:700}
+  .nav-links a:hover{color:var(--cab)}
   @media(min-width:920px){.nav-links{display:flex}}
-  .nav .btn{padding:9px 18px;font-size:14px}
+  .nav .btn{padding:9px 18px;font-size:14.5px;border-width:2px;box-shadow:none}
 
-  /* Hero */
-  .hero{padding:56px 0 40px}
-  .hero-grid{display:grid;gap:48px;align-items:center}
-  @media(min-width:920px){.hero{padding:80px 0 88px}.hero-grid{grid-template-columns:1.05fr .95fr;gap:64px}}
-  .hero h1{margin-bottom:0}
-  .hero .lead{margin:22px 0 30px}
-  .hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
-  .hero-strip{display:flex;gap:0;margin-top:40px;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
-  .hero-strip .kpi{flex:1;display:flex;flex-direction:column;gap:3px;padding:16px 18px}
-  .hero-strip .kpi+.kpi{border-left:1px solid var(--line)}
-  .hero-strip .kpi b{font-size:24px;font-family:var(--display);font-weight:800;color:var(--text);letter-spacing:-.02em}
-  .hero-strip .kpi b em{font-style:normal;color:var(--accent);font-size:15px;margin-left:2px}
-  .hero-strip .kpi span{font-size:12.5px;color:var(--faint)}
-  .hero-strip .sep{display:none}
+  /* ── Hero(黃 drench) ── */
+  .hero{padding:clamp(48px,7vw,88px) 0 clamp(56px,8vw,96px)}
+  .hero-grid{display:grid;gap:44px;align-items:center}
+  @media(min-width:920px){.hero-grid{grid-template-columns:1.08fr .92fr;gap:56px}}
+  .hero .kicker{
+    display:inline-flex;align-items:center;gap:10px;margin-bottom:22px;
+    background:var(--ink);color:var(--cab);border-radius:999px;
+    padding:8px 18px;font-weight:900;font-size:14.5px;letter-spacing:.02em;
+    box-shadow:4px 4px 0 rgba(20,16,8,.25);
+  }
+  .hero .kicker .dot{width:9px;height:9px;border-radius:50%;background:var(--cab);flex:none}
+  .hero p.lead{margin:22px 0 30px;font-size:clamp(16.5px,2.4vw,19.5px);font-weight:500;color:var(--on-cab-mute);max-width:30em;line-height:1.75}
+  .hero p.lead b{color:var(--ink)}
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
 
-  /* 手機演示:實心、無外光暈 */
-  .demo-wrap{display:flex;justify-content:center}
+  /* 空車燈(剩餘名額) */
+  .rooflight{
+    display:inline-flex;flex-direction:column;align-items:center;gap:2px;margin-top:34px;
+    background:var(--ink);border-radius:12px;padding:12px 26px 14px;
+    box-shadow:5px 5px 0 rgba(20,16,8,.25), inset 0 0 0 2px rgba(255,178,62,.4);
+  }
+  .rooflight .rl-label{font-size:12.5px;font-weight:700;color:var(--on-ink-mute);letter-spacing:.14em}
+  .rooflight .rl-num{font-family:var(--cond);font-weight:700;font-size:40px;line-height:1.05;color:var(--cab);font-variant-numeric:tabular-nums}
+  .rooflight .rl-num small{font-family:var(--font);font-size:15px;font-weight:900;margin-left:4px}
+
+  /* 手機(播真實 demo) */
+  .phone-wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
   .phone{
-    position:relative;width:min(340px,86vw);border-radius:38px;padding:10px;
-    background:#0A0C0F;border:1px solid var(--line-2);
-    box-shadow:0 24px 60px -24px rgba(0,0,0,.8);
+    width:min(300px,80vw);border-radius:34px;padding:10px;background:var(--ink);
+    box-shadow:10px 10px 0 rgba(20,16,8,.22);
   }
-  .phone::before{content:"";position:absolute;top:14px;left:50%;transform:translateX(-50%);width:92px;height:20px;background:#050708;border-radius:0 0 12px 12px;z-index:3}
-  .phone-screen{border-radius:29px;overflow:hidden;background:#0D0F13;position:relative;height:540px;border:1px solid rgba(255,255,255,.04)}
-  .chat-head{background:#14171C;padding:15px 16px 12px;font-size:14.5px;font-weight:700;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line)}
-  .chat-head span{color:var(--faint);font-weight:400;font-size:12px}
-  .chat{padding:16px 13px;display:flex;flex-direction:column;gap:10px}
-  .msg{max-width:87%;background:#191D23;border-radius:4px 12px 12px 12px;padding:9px 13px;font-size:13px;color:var(--muted);opacity:0;transform:translateY(12px);transition:opacity .4s var(--ease),transform .4s var(--ease)}
-  .msg .who{font-size:11px;color:#5c646c;display:block;margin-bottom:2px;font-weight:600}
-  .msg.on{opacity:.5;transform:none}
-  .msg.dispatch{color:var(--text);border:1px solid transparent;background:#1E242B}
-  .msg.dispatch.on{opacity:1}
-  .msg.dispatch.hit{border-color:var(--accent);background:#20262d}
-  .sweep{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;transform-origin:50% 50%;
-    background:conic-gradient(from 0deg at 50% 50%,rgba(255,178,62,.30) 0deg,rgba(255,178,62,.05) 40deg,transparent 55deg,transparent 360deg);
-    -webkit-mask:radial-gradient(circle at 50% 50%,#000 0 44%,transparent 66%);mask:radial-gradient(circle at 50% 50%,#000 0 44%,transparent 66%)}
-  .sweep.on{opacity:1;animation:sweep 2.4s linear}
-  @keyframes sweep{from{transform:rotate(0)}to{transform:rotate(720deg)}}
-  .tripcard{
-    position:absolute;left:11px;right:11px;bottom:11px;
-    background:var(--surface-2);
-    border:1px solid var(--accent);border-radius:14px;padding:15px;
-    transform:translateY(120%);transition:transform .5s var(--ease);
+  .phone video{width:100%;aspect-ratio:480/1040;object-fit:cover;border-radius:25px;background:#000}
+  .phone-cap{font-size:14px;font-weight:700;color:var(--on-cab-mute)}
+
+  /* ── 痛點(黑帶) ── */
+  .pains-head{max-width:22em}
+  .pains{display:grid;gap:0;margin-top:40px;border-top:1px solid rgba(244,237,225,.16)}
+  @media(min-width:760px){.pains{grid-template-columns:1fr 1fr;column-gap:56px}}
+  .pain{display:flex;gap:14px;align-items:baseline;padding:15px 2px;border-bottom:1px solid rgba(244,237,225,.16);font-size:16.5px;color:var(--on-ink)}
+  .pain .x{font-family:var(--cond);font-weight:700;color:var(--cab);flex:none;font-size:18px}
+  .pain-punch{margin-top:44px;font-size:clamp(23px,4.2vw,34px);font-weight:900;line-height:1.5;text-wrap:balance}
+  .pain-punch em{font-style:normal;color:var(--cab)}
+
+  /* ── 解決方案(黃帶):路線圖 ── */
+  .route{display:grid;gap:0;margin-top:44px;max-width:640px}
+  .stop{display:flex;gap:20px;position:relative;padding-bottom:30px}
+  .stop:last-child{padding-bottom:0}
+  .stop::before{content:"";position:absolute;left:12px;top:30px;bottom:0;width:4px;background:var(--ink);border-radius:2px}
+  .stop:last-child::before{display:none}
+  .stop .pt{flex:none;width:28px;height:28px;border-radius:50%;background:var(--cab);border:5px solid var(--ink);z-index:1;margin-top:2px}
+  .stop:last-child .pt{background:var(--green)}
+  .stop b{display:block;font-size:19px;font-weight:900}
+  .stop span{color:var(--on-cab-mute);font-size:15.5px;font-weight:500}
+  .fields{display:flex;flex-wrap:wrap;gap:10px;margin-top:38px;max-width:660px}
+  .fields i{font-style:normal;background:transparent;border:2px solid var(--ink);border-radius:999px;padding:6px 16px;font-size:14.5px;font-weight:700}
+  .fields i.solid{background:var(--ink);color:var(--cab)}
+
+  /* ── 功能規格銘牌(黑帶) ── */
+  .plate{margin-top:44px;border:2px solid rgba(255,178,62,.5);border-radius:12px;overflow:hidden}
+  .plate-row{display:grid;grid-template-columns:1fr;border-bottom:1px solid rgba(244,237,225,.14)}
+  .plate-row:last-child{border-bottom:0}
+  @media(min-width:760px){.plate-row{grid-template-columns:230px 1fr}}
+  .plate-row dt{background:var(--ink-2);padding:16px 20px;font-weight:900;font-size:16.5px;color:var(--cab);display:flex;align-items:center;gap:10px}
+  .plate-row dd{padding:16px 20px;color:var(--on-ink-mute);font-size:15.5px;line-height:1.65}
+  .plate-row dd b{color:var(--on-ink);font-weight:700}
+  .plate-note{margin-top:18px;color:var(--on-ink-mute);font-size:14px}
+  .plate-note b{color:var(--cab)}
+
+  /* ── 八步(黃帶,真序列) ── */
+  .steps{margin-top:44px;display:grid;gap:0;max-width:620px}
+  .step{display:flex;gap:18px;padding:13px 0;border-bottom:1px dashed var(--ink-line);align-items:baseline}
+  .step:last-child{border-bottom:0}
+  .step .n{font-family:var(--cond);font-weight:700;font-size:26px;width:40px;flex:none;color:var(--ink)}
+  .step b{font-size:17.5px;font-weight:900}
+  .step span{display:block;color:var(--on-cab-mute);font-size:14.5px;font-weight:500}
+
+  /* ── 司機回饋(黑帶) ── */
+  .quotes{display:grid;gap:36px;margin-top:44px}
+  @media(min-width:760px){.quotes{grid-template-columns:1fr 1fr;gap:44px 64px}}
+  .quote p{font-size:clamp(17.5px,2.2vw,20px);font-weight:700;line-height:1.75;color:var(--on-ink)}
+  .quote p::before{content:"「";color:var(--cab)}
+  .quote p::after{content:"」";color:var(--cab)}
+  .quote footer{margin-top:12px;color:var(--on-ink-mute);font-size:14.5px;font-weight:500}
+  .quote footer b{color:var(--cab);font-weight:900;margin-right:8px}
+  .quotes-note{margin-top:30px;font-size:13px;color:var(--on-ink-mute)}
+
+  /* ── 計費表定價(黃帶) ── */
+  .seats-line{display:flex;justify-content:center;margin-top:30px}
+  .ladder{max-width:560px;margin:44px auto 0;display:grid;gap:12px}
+  .rung{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:15px 20px;border:2px solid var(--ink);border-radius:10px;font-size:16px;font-weight:700;background:rgba(255,255,255,.22)}
+  .rung .price-sm{font-family:var(--cond);font-weight:700;font-size:22px}
+  .rung .when{font-size:13px;padding:5px 13px;border-radius:999px;background:transparent;border:2px solid var(--ink-line);color:var(--on-cab-mute);font-weight:900;flex:none}
+  .rung.now{background:var(--ink);color:var(--cab);border-color:var(--ink);box-shadow:6px 6px 0 rgba(20,16,8,.25)}
+  .rung.now .when{background:var(--cab);color:var(--ink);border-color:var(--cab)}
+
+  .meters{display:grid;gap:22px;margin-top:48px;align-items:stretch}
+  @media(min-width:900px){.meters{grid-template-columns:1fr 1.15fr 1fr;gap:20px}}
+  .meter{
+    border:2.5px solid var(--ink);border-radius:14px;background:rgba(255,255,255,.26);
+    padding:26px 24px;display:flex;flex-direction:column;gap:8px;position:relative;
   }
-  .tripcard.on{transform:none}
-  .tc-top{display:flex;align-items:center;gap:8px;font-size:12px;margin-bottom:9px}
-  .badge{background:var(--accent-soft);color:var(--accent);border-radius:6px;padding:3px 9px;font-weight:700;border:1px solid rgba(255,178,62,.35)}
-  .tc-src{color:var(--faint)}
-  .tc-route{font-size:14px;font-weight:600;display:grid;gap:5px;margin-bottom:9px}
-  .tc-route i{font-style:normal;color:var(--faint);font-weight:400;font-size:11.5px;margin-right:7px;display:inline-block;width:26px}
-  .tc-meta{font-size:12px;color:var(--muted);margin-bottom:11px}
-  .tc-meta b{color:var(--text)}
-  .tc-btns{display:flex;gap:7px}
-  .tc-btns button{flex:1;background:#232830;border:1px solid var(--line);color:var(--text);border-radius:7px;padding:10px 0;font-size:13.5px;font-weight:700;font-family:var(--font);transition:.18s;pointer-events:none}
-  .tc-btns button.tap{background:var(--accent);color:var(--ink);border-color:transparent}
-  .replybub{position:absolute;right:13px;bottom:236px;z-index:5;max-width:78%;background:var(--green);color:#053017;border-radius:12px 4px 12px 12px;padding:9px 13px;font-size:13px;font-weight:700;opacity:0;transform:translateY(8px);transition:all .35s var(--ease);box-shadow:0 6px 20px rgba(0,0,0,.45)}
-  .replybub.on{opacity:1;transform:none}
-  .replybub small{display:block;font-weight:400;font-size:10px;opacity:.8;margin-top:1px}
-  .demo-cap{margin-top:18px;text-align:center;font-size:13px;color:var(--faint)}
+  .meter .m-name{font-weight:900;font-size:16px}
+  .meter .m-price{font-family:var(--cond);font-weight:700;font-size:56px;line-height:1;letter-spacing:.01em;font-variant-numeric:tabular-nums}
+  .meter .m-price small{font-family:var(--font);font-size:15px;font-weight:700;letter-spacing:0}
+  .meter .m-per{font-size:14.5px;color:var(--on-cab-mute);font-weight:500;min-height:22px}
+  .meter .m-day{font-weight:900;font-size:15px}
+  .meter .btn{margin-top:auto;width:100%}
+  .meter.hero-meter{
+    background:var(--ink);color:var(--on-ink);border-color:var(--ink);
+    box-shadow:8px 8px 0 rgba(20,16,8,.28);padding-top:34px;
+  }
+  .meter.hero-meter .m-name{color:var(--cab)}
+  .meter.hero-meter .m-orig{color:var(--on-ink-mute);text-decoration:line-through;font-size:14.5px}
+  .meter.hero-meter .m-price{color:var(--cab);font-size:64px}
+  .meter.hero-meter .m-per{color:var(--on-ink-mute)}
+  .meter.hero-meter .m-day{color:var(--cab)}
+  .meter .tab{
+    position:absolute;top:-15px;left:20px;background:var(--cab);color:var(--ink);
+    border:2.5px solid var(--ink);border-radius:7px;padding:4px 14px;font-size:13.5px;font-weight:900;
+  }
+  .price-hint{max-width:640px;margin:36px auto 0;text-align:center;font-size:14.5px;color:var(--on-cab-mute);font-weight:500;line-height:1.75}
+  .price-hint b{color:var(--ink)}
 
-  /* 通用面板:實心、1px 邊、克制圓角,無毛玻璃 */
-  .glass{background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
-  .media-slot{max-width:900px;margin:40px auto 0}
-  .vidgrid{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:40px}
-  .vidphone{width:min(290px,78vw);display:flex;flex-direction:column;gap:12px}
-  .vidphone video{width:100%;aspect-ratio:9/19.5;object-fit:cover;border-radius:22px;border:1px solid var(--line-2);background:#000;display:block}
-  .vidphone figcaption{text-align:center;font-size:13px;color:var(--faint)}
-  .shots{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:32px auto 0;max-width:900px}
-  @media(min-width:760px){.shots{grid-template-columns:repeat(4,1fr)}}
-
-  /* 痛點 */
-  .pains{display:grid;gap:1px;margin-top:34px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
-  @media(min-width:760px){.pains{grid-template-columns:1fr 1fr}}
-  .pain{display:flex;gap:13px;align-items:flex-start;padding:18px 20px;font-size:15px;color:#C6CCD2;background:var(--bg)}
-  .pain .x{flex:none;width:22px;height:22px;border-radius:6px;margin-top:1px;background:rgba(228,105,92,.12);color:var(--red);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800}
-  .pain-emo{margin-top:40px;text-align:center;font-size:clamp(20px,4.2vw,28px);font-weight:800;line-height:1.5;font-family:var(--display);letter-spacing:-.02em}
-  .pain-emo span{color:var(--accent)}
-
-  /* 流程 */
-  .flow{display:grid;gap:12px;margin:36px 0 40px}
-  @media(min-width:900px){.flow{grid-template-columns:repeat(7,1fr);align-items:center;gap:8px}}
-  .flow-step{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px 14px;font-size:14.5px;font-weight:700;text-align:center}
-  .flow-step small{display:block;font-weight:400;color:var(--faint);font-size:12px;margin-top:4px;line-height:1.4}
-  .flow-step.hot{border-color:var(--accent);background:var(--accent-soft)}
-  .flow-arrow{color:var(--faint);font-size:16px;text-align:center;line-height:1}
-  @media(max-width:899px){.flow-arrow{transform:rotate(90deg)}}
-  .cardfields{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:10px}
-  .chip{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:7px 14px;font-size:13.5px;color:#C6CCD2}
-  .chip.hot{border-color:rgba(255,178,62,.5);color:var(--accent)}
-
-  /* 功能:實心卡,hover 只提亮邊框,無漸層邊框、無浮起 */
-  .feats{display:grid;gap:14px;margin-top:40px}
-  @media(min-width:700px){.feats{grid-template-columns:1fr 1fr}}
-  @media(min-width:1000px){.feats{grid-template-columns:1fr 1fr 1fr}}
-  .feat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:26px;display:flex;flex-direction:column;gap:9px;transition:border-color .2s,background .2s}
-  .feat:hover{border-color:var(--line-2);background:var(--surface-2)}
-  .feat .ico{width:42px;height:42px;border-radius:var(--r-sm);background:var(--accent-soft);border:1px solid rgba(255,178,62,.3);display:flex;align-items:center;justify-content:center;margin-bottom:6px}
-  .feat p{color:var(--muted);font-size:14.5px;line-height:1.6}
-  .feat ul{list-style:none;color:var(--muted);font-size:13.5px;display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
-  .feat ul li{background:var(--surface-2);border:1px solid var(--line);border-radius:6px;padding:3px 10px}
-  .feat-quote{color:var(--accent);font-size:14px;font-weight:700;margin-top:auto;padding-top:8px}
-
-  /* 步驟時間軸 */
-  .steps{margin-top:40px;display:grid;gap:0;max-width:600px;margin-inline:auto}
-  .step{display:flex;gap:18px;position:relative;padding-bottom:26px}
-  .step:last-child{padding-bottom:0}
-  .step::before{content:"";position:absolute;left:17px;top:38px;bottom:0;width:1px;background:var(--line-2)}
-  .step:last-child::before{display:none}
-  .step .n{flex:none;width:35px;height:35px;border-radius:var(--r-sm);z-index:1;background:var(--surface-2);border:1px solid rgba(255,178,62,.5);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;font-family:var(--display)}
-  .step .body b{display:block;font-size:16px;margin-bottom:2px}
-  .step .body span{color:var(--muted);font-size:14px}
-
-  /* 效益 */
-  .gains{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-top:38px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
-  @media(min-width:760px){.gains{grid-template-columns:repeat(4,1fr)}}
-  .gain{background:var(--bg);padding:22px 14px;text-align:center;font-weight:700;font-size:15px}
-  .gain .ck{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:rgba(6,199,85,.14);color:var(--green);margin-bottom:10px;font-size:13px}
-  .gain-main{margin-top:40px;text-align:center;font-size:clamp(20px,4.2vw,29px);font-weight:800;line-height:1.45;font-family:var(--display);letter-spacing:-.02em}
-  .gain-main em{font-style:normal;color:var(--accent)}
-
-  /* 見證 */
-  .quotes{display:grid;gap:14px;margin-top:40px}
-  @media(min-width:760px){.quotes{grid-template-columns:1fr 1fr}}
-  .quote{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:26px;font-size:15px}
-  .quote .mk{font-size:40px;font-family:var(--display);color:var(--accent);line-height:.5;height:20px}
-  .quote p{margin:10px 0 16px;line-height:1.75;color:#DDE2E6}
-  .quote .who{color:var(--faint);font-size:13px;display:flex;align-items:center;gap:10px}
-  .quote .who .av{width:34px;height:34px;border-radius:50%;background:var(--surface-2);border:1px solid var(--line-2);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;font-family:var(--display)}
-  .quote .who b{color:var(--text);display:block;font-size:14px}
-  .quotes-note{margin-top:18px;font-size:12.5px;color:var(--faint);text-align:center}
-
-  /* 價格 */
-  .plans{display:grid;gap:16px;margin-top:40px;align-items:stretch}
-  @media(min-width:900px){.plans{grid-template-columns:repeat(4,1fr)}}
-  .plan{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:28px 24px;display:flex;flex-direction:column;gap:8px;position:relative}
-  .plan .pname{font-size:14px;font-weight:700;color:var(--muted);letter-spacing:.02em}
-  .plan .price{font-size:34px;font-weight:800;line-height:1.1;font-family:var(--display);letter-spacing:-.02em}
-  .plan .price small{font-size:14px;font-weight:400;color:var(--muted);font-family:var(--font)}
-  .plan .orig{color:var(--faint);text-decoration:line-through;font-size:14px}
-  .plan .per{color:var(--muted);font-size:13.5px;min-height:20px;line-height:1.5}
-  .plan .save{color:var(--accent);font-size:13.5px;font-weight:700}
-  .plan .perday{font-size:14px;font-weight:700;color:var(--accent)}
-  .plan .perday b{font-family:var(--display);font-weight:800}
-  .plan .btn{margin-top:auto;width:100%}
-  .plan.featured{background:var(--surface-2);border:1.5px solid var(--accent)}
-  @media(min-width:900px){.plan.featured .price{font-size:42px}}
-  .plan .ribbon{position:absolute;top:-11px;left:24px;background:var(--accent);color:var(--ink);font-size:12px;font-weight:800;border-radius:5px;padding:4px 12px;white-space:nowrap}
-  .price-hint{text-align:center;margin-top:28px;color:var(--muted);font-size:14px;line-height:1.7}
-  .price-hint b{color:var(--accent)}
-
-  /* 創始會員:名額條 + 價格階梯 */
-  .seats-wrap{text-align:center;margin-top:24px}
-  .seats{display:inline-flex;align-items:center;gap:10px;padding:11px 20px;border-radius:var(--r-sm);background:var(--surface);border:1px solid var(--line-2);font-size:14px;font-weight:600;color:var(--text)}
-  .seats b{color:var(--accent)}
-  .seats-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none}
-  .ladder{max-width:560px;margin:40px auto 0;display:grid;gap:10px}
-  .rung{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:15px 20px;border-radius:var(--r);background:var(--surface);border:1px solid var(--line);font-size:15px;color:var(--muted)}
-  .rung b{color:var(--text);font-family:var(--display);font-weight:700;letter-spacing:-.01em}
-  .rung.now{background:var(--surface-2);border-color:var(--accent);color:var(--text)}
-  .rung.now b{color:var(--accent)}
-  .rung .when{font-size:12px;padding:4px 11px;border-radius:5px;background:var(--surface-2);color:var(--faint);font-weight:700;white-space:nowrap;flex:none}
-  .rung.now .when{background:var(--accent);color:var(--ink)}
-
-  /* FAQ */
-  .faq{max-width:760px;margin:40px auto 0}
-  .faq details{border:1px solid var(--line);border-radius:var(--r);background:var(--surface);margin-bottom:10px;overflow:hidden}
-  .faq details[open]{border-color:var(--line-2)}
-  .faq summary{cursor:pointer;list-style:none;padding:17px 20px;font-weight:700;font-size:15.5px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+  /* ── FAQ(黑帶) ── */
+  .faq{max-width:740px;margin:44px auto 0}
+  .faq details{border-bottom:1px solid rgba(244,237,225,.16)}
+  .faq details:first-child{border-top:1px solid rgba(244,237,225,.16)}
+  .faq summary{cursor:pointer;list-style:none;padding:19px 4px;font-weight:900;font-size:17px;display:flex;justify-content:space-between;align-items:center;gap:14px}
   .faq summary::-webkit-details-marker{display:none}
-  .faq summary::after{content:"+";color:var(--accent);font-size:20px;font-weight:400;flex:none}
-  .faq details[open] summary::after{content:"–"}
-  .faq .a{padding:0 20px 17px;color:var(--muted);font-size:14.5px;line-height:1.7}
+  .faq summary::after{content:"＋";color:var(--cab);font-weight:400;font-size:20px;flex:none;transition:transform .2s var(--ease)}
+  .faq details[open] summary::after{transform:rotate(45deg)}
+  .faq .a{padding:0 4px 20px;color:var(--on-ink-mute);font-size:15.5px;line-height:1.75;max-width:62ch}
 
-  /* 信任 */
-  .trust{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:36px}
-  @media(min-width:760px){.trust{grid-template-columns:repeat(4,1fr)}}
-  .trust a{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-sm);padding:16px;text-align:center;font-size:14px;font-weight:700;transition:border-color .2s}
-  .trust a:hover{border-color:var(--line-2)}
-  .disclaim{margin-top:26px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);padding:18px 20px;font-size:13.5px;color:var(--faint);text-align:center;line-height:1.7}
+  /* ── 聯絡(黃帶) ── */
+  .contact-grid{display:grid;gap:36px;margin-top:44px;align-items:center;justify-items:center}
+  @media(min-width:760px){.contact-grid{grid-template-columns:auto 1fr;gap:56px;justify-items:start}}
+  .qr-card{background:var(--paper);border:2.5px solid var(--ink);border-radius:14px;padding:16px;width:250px;box-shadow:8px 8px 0 rgba(20,16,8,.25)}
+  .qr-card img{border-radius:6px}
+  .qr-card figcaption{text-align:center;font-weight:900;font-size:14px;margin-top:10px;color:var(--ink)}
+  .c-info{display:flex;flex-direction:column;gap:14px;text-align:center;align-items:center}
+  @media(min-width:760px){.c-info{text-align:left;align-items:flex-start}}
+  .c-id{display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center}
+  .c-id .num{font-size:clamp(30px,5vw,42px);color:var(--ink)}
+  .copy{background:transparent;border:2px solid var(--ink);color:var(--ink);border-radius:8px;padding:8px 16px;font-size:14px;font-weight:900;cursor:pointer;font-family:var(--font);transition:.15s}
+  .copy:hover{background:var(--ink);color:var(--cab)}
+  .copy.done{background:var(--green);border-color:var(--green);color:#fff}
+  .c-note{font-size:15px;color:var(--on-cab-mute);font-weight:500;max-width:26em}
+  .c-note b{color:var(--ink)}
 
-  /* 購買・聯絡 */
-  .contact-card{display:grid;gap:26px;max-width:760px;margin:40px auto 0;padding:28px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
-  @media(min-width:640px){.contact-card{grid-template-columns:auto 1fr;padding:34px}}
-  .qr{background:#fff;border-radius:var(--r);padding:14px;width:232px;max-width:100%;margin-inline:auto;aspect-ratio:1;display:flex;align-items:center;justify-content:center}
-  .qr img{width:100%;height:auto;border-radius:4px;display:block}
-  .qr-ph{width:100%;height:100%;align-items:center;justify-content:center;text-align:center;color:#5a6b78;font-size:13px;line-height:1.6}
-  .contact-info{display:flex;flex-direction:column;gap:13px;text-align:center;align-items:center}
-  @media(min-width:640px){.contact-info{text-align:left;align-items:flex-start}}
-  .ci-label{font-family:var(--display);font-size:12px;color:var(--faint);letter-spacing:.16em;text-transform:uppercase}
-  .ci-id{display:flex;align-items:center;gap:12px}
-  .ci-id .num{font-size:clamp(26px,5.4vw,34px);font-weight:800;font-family:var(--display);color:var(--accent);letter-spacing:-.01em}
-  .copy{background:var(--surface-2);border:1px solid var(--line-2);color:var(--text);border-radius:var(--r-sm);padding:7px 15px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font);transition:.18s}
-  .copy:hover{border-color:var(--accent);color:var(--accent)}
-  .copy.done{background:var(--accent);color:var(--ink);border-color:transparent}
-  .ci-note{font-size:13.5px;color:var(--muted);line-height:1.6}
-  .ci-note b{color:var(--text)}
-  .contact-info .btn{width:100%}
-  @media(min-width:640px){.contact-info .btn{width:auto;align-self:stretch;max-width:280px}}
+  /* ── 尾聲 CTA(黑帶) ── */
+  .final h2{font-size:clamp(30px,5.6vw,54px)}
+  .final .lead{margin:18px 0 34px;color:var(--on-ink-mute);font-size:clamp(16px,2.2vw,19px);font-weight:500;max-width:26em}
+  .final .legal{margin-top:56px;padding-top:26px;border-top:1px solid rgba(244,237,225,.16);font-size:13px;color:var(--on-ink-mute);line-height:2}
+  .final .legal a{text-decoration:underline;text-underline-offset:3px}
+  .final .legal a:hover{color:var(--cab)}
 
-  /* 最終 CTA:實心面板,無毛玻璃無光暈 */
-  .final{text-align:center}
-  .final .inner{border:1px solid var(--line);border-radius:var(--r);background:var(--surface);padding:clamp(40px,7vw,68px) 24px}
-  .final h2{font-size:clamp(27px,5.6vw,44px)}
-  .final .lead{margin:16px auto 30px}
-  .final-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-
-  footer{padding:40px 0 116px;color:var(--faint);font-size:12.5px;text-align:center;line-height:2;border-top:1px solid var(--line);margin-top:0}
-  @media(min-width:900px){footer{padding-bottom:44px}}
-  footer a{text-decoration:underline;text-underline-offset:3px}
-  footer a:hover{color:var(--muted)}
-
-  /* 手機底部固定 CTA:實心 */
-  .stickybar{position:fixed;left:0;right:0;bottom:0;z-index:60;background:var(--bg);border-top:1px solid var(--line);padding:11px 16px calc(11px + env(safe-area-inset-bottom));display:flex;gap:10px;transform:translateY(120%);transition:transform .3s var(--ease)}
-  .stickybar.show{transform:none}
-  .stickybar .btn{flex:1;padding:12px 0;font-size:15px}
+  /* 手機底部固定 CTA */
+  .stickybar{
+    position:fixed;left:0;right:0;bottom:0;z-index:var(--z-sticky);
+    background:var(--ink);border-top:2px solid rgba(255,178,62,.4);
+    padding:10px 16px calc(10px + env(safe-area-inset-bottom));
+    display:flex;gap:10px;transform:translateY(110%);visibility:hidden;transition:transform .3s var(--ease),visibility 0s .3s;
+  }
+  .stickybar.show{transform:none;visibility:visible;transition:transform .3s var(--ease)}
+  .stickybar .btn{flex:1;padding:13px 0;font-size:16px;box-shadow:none}
   @media(min-width:900px){.stickybar{display:none}}
 
-  .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
-  .reveal.in{opacity:1;transform:none}
-  .divider{height:1px;background:var(--line);border:0;max-width:1120px;margin-inline:auto}
-
+  /* 進場動畫:預設可見,JS 加 .in 才播(headless/無 JS 不會空白) */
+  .rise{opacity:1}
+  .rise.in{animation:rise .8s var(--ease) both}
+  @keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+  .hero .rise.in:nth-child(2){animation-delay:.05s}
+  .hero .rise.in:nth-child(3){animation-delay:.1s}
+  .hero .rise.in:nth-child(4){animation-delay:.15s}
+  .hero .rise.in:nth-child(5){animation-delay:.2s}
   @media(prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
-    .msg,.msg.dispatch{opacity:1;transform:none;transition:none}
-    .msg.dispatch{border-color:var(--accent)}
-    .tripcard,.replybub{transform:none;opacity:1;transition:none}
-    .sweep{display:none}
-    .reveal{opacity:1;transform:none;transition:none}
+    .rise.in{animation:none}
+    .btn,.btn:hover,.btn:active{transform:none;transition:none}
   }
 </style>
 </head>
 <body>
 
-<!-- 導覽 -->
-<header class="nav" id="top">
+<header class="nav">
   <div class="wrap nav-in">
     <a class="logo" href="#top" aria-label="TripRadar 回到頁首">
-      <img class="mark" src="assets/app-icon.png" width="30" height="30" alt="" style="border-radius:7px">
+      <img src="assets/app-icon.png" alt="" width="32" height="32">
       TripRadar <small>車趟輔助</small>
     </a>
     <nav class="nav-links" aria-label="頁內導覽">
-      <a href="#pain">司機痛點</a><a href="#how">解決方案</a><a href="#feat">核心功能</a><a href="#price">收費方案</a><a href="#faq">常見問題</a>
+      <a href="#pain">司機痛點</a><a href="#how">怎麼運作</a><a href="#spec">功能</a><a href="#price">收費</a><a href="#faq">常見問題</a>
     </nav>
-    <a class="btn btn-amber" href="#price">立即體驗</a>
+    <a class="btn btn-cab" href="#price">立即體驗</a>
   </div>
 </header>
 
-<!-- 1. Hero -->
-<section class="hero">
+<!-- ═══ Hero:車身黃 drench ═══ -->
+<main id="top">
+<section class="hero" aria-label="主打">
   <div class="wrap hero-grid">
     <div>
-      <span class="eyebrow">職業司機的 AI 接單助手</span>
-      <h1>不用一直刷 LINE，<br>真正的車趟<br><span class="grad">直接送到你眼前。</span></h1>
-      <p class="lead">每天十幾個 LINE 群組、幾千則訊息，TripRadar 自動辨識車趟、整理上下車、距離與預計抵達時間，讓你少漏單、快速回覆、專心開車。</p>
-      <div class="hero-ctas">
-        <a class="btn btn-amber" href="#price">立即體驗 →</a>
-        <a class="btn btn-ghost" href="#video">觀看操作影片</a>
+      <p class="kicker rise"><span class="dot" aria-hidden="true"></span>白牌司機的 AI 接單助手</p>
+      <h1 class="rise">不用一直刷 LINE，<br>真正的車趟<br>直接送到你眼前。</h1>
+      <p class="lead rise">每天十幾個群組、幾千則訊息。TripRadar 自動抓出真正的派單，整理好上下車、距離、預計抵達時間，<b>點一下就回覆</b>。你只要專心開車。</p>
+      <div class="hero-ctas rise">
+        <a class="btn btn-ink" href="#price">立即體驗 →</a>
+        <a class="btn btn-hollow-ink" href="#contact">LINE 諮詢</a>
       </div>
-      <div class="hero-strip">
-        <div class="kpi"><b class="num">2<em>小時</em></b><span>每天少滑 LINE</span></div>
-        <div class="sep"></div>
-        <div class="kpi"><b class="num"><span data-seats="left">—</span><em>名</em></b><span>創始會員剩餘名額</span></div>
-        <div class="sep"></div>
-        <div class="kpi"><b class="num">599<em>元</em></b><span>解鎖 30 天體驗</span></div>
+      <div class="rooflight rise" role="status" aria-label="創始會員剩餘名額">
+        <span class="rl-label">創 始 會 員 剩 餘</span>
+        <span class="rl-num"><span data-seats="left">100</span><small>名</small></span>
       </div>
     </div>
+    <div class="phone-wrap rise">
+      <div class="phone">
+        <video src="assets/demo.mp4" autoplay muted loop playsinline preload="metadata" aria-label="App 實機操作畫面：車趟卡片自動整理,點分鐘直接接單"></video>
+      </div>
+      <p class="phone-cap">App 實機畫面：抓單 → 車趟卡片 → 點分鐘接單</p>
+    </div>
+  </div>
+</section>
 
-    <div class="demo-wrap">
-      <div>
-        <div class="phone" id="demo" aria-label="TripRadar 運作演示：LINE 群組訊息自動變成車趟卡片">
-          <div class="phone-screen">
-            <div class="chat-head">北區派單群 3 <span>成員 187</span></div>
-            <div class="chat">
-              <div class="msg" data-t="0"><span class="who">管理員</span>【公告】本週費率調整說明，請各位司機詳閱…</div>
-              <div class="msg" data-t="1"><span class="who">小黑</span>收到</div>
-              <div class="msg" data-t="2"><span class="who">阿良</span>謝派 已到</div>
-              <div class="msg dispatch" data-t="3"><span class="who">派單-阿德</span>三重 重新路五段609巷 到 台北車站 現金</div>
-              <div class="msg" data-t="4"><span class="who">小胖</span>今天有人跑機場嗎？</div>
-            </div>
-            <div class="sweep" id="sweep"></div>
-            <div class="replybub" id="reply">@派單-阿德 重新路 5分<small>已自動標記派單人・帶入回覆</small></div>
-            <div class="tripcard" id="card">
-              <div class="tc-top"><span class="badge">⚡ 即時</span><span class="tc-src">北區派單群 3・派單-阿德</span></div>
-              <div class="tc-route">
-                <span><i>上車</i>三重區重新路五段609巷</span>
-                <span><i>下車</i>台北車站</span>
-              </div>
-              <div class="tc-meta">距離 <b class="num">2.1 km</b>・預估 <b class="num">6 分</b>到達・現金</div>
-              <div class="tc-btns">
-                <button id="tapbtn" type="button">5分</button><button type="button">10分</button><button type="button">15分</button><button type="button">自訂</button>
-              </div>
-            </div>
-          </div>
+<div class="checker" role="presentation"></div>
+
+<!-- ═══ 痛點:黑帶 ═══ -->
+<section class="band band-ink" id="pain">
+  <div class="wrap">
+    <h2 class="pains-head rise">你是不是每天<br>都在做這些事？</h2>
+    <div class="pains">
+      <p class="pain"><span class="x">✕</span>LINE 群組太多，一直切來切去</p>
+      <p class="pain"><span class="x">✕</span>一天幾千則訊息，公告比車趟還多</p>
+      <p class="pain"><span class="x">✕</span>開車時還要一直盯手機</p>
+      <p class="pain"><span class="x">✕</span>好不容易看到車趟，別人已經接走</p>
+      <p class="pain"><span class="x">✕</span>派單格式每個群組都不一樣</p>
+      <p class="pain"><span class="x">✕</span>漏掉一張好單，就是幾百元收入</p>
+      <p class="pain"><span class="x">✕</span>看到地址還要自己查距離、算時間</p>
+      <p class="pain"><span class="x">✕</span>回覆還要找群組、標人、打字</p>
+    </div>
+    <p class="pain-punch">不是沒有單。<br>是訊息太多，<em>你根本來不及看</em>。</p>
+  </div>
+</section>
+
+<div class="checker" role="presentation"></div>
+
+<!-- ═══ 怎麼運作:黃帶,路線圖 ═══ -->
+<section class="band" id="how">
+  <div class="wrap">
+    <h2 class="rise">從一則訊息，<br>到一張能跑的車趟。</h2>
+    <div class="route" aria-label="運作流程">
+      <div class="stop"><span class="pt" aria-hidden="true"></span><div><b>LINE 群組訊息進來</b><span>通知進來的每一則，App 在背景看</span></div></div>
+      <div class="stop"><span class="pt" aria-hidden="true"></span><div><b>AI 判斷是不是派單</b><span>即時、預約、代駕自動分類，聊天公告自動略過</span></div></div>
+      <div class="stop"><span class="pt" aria-hidden="true"></span><div><b>整理成車趟卡片</b><span>上下車、距離、預計抵達時間，一張卡看完</span></div></div>
+      <div class="stop"><span class="pt" aria-hidden="true"></span><div><b>點分鐘，直接回覆</b><span>跳回原群組、標記派單人、帶好文字，送出由你按</span></div></div>
+    </div>
+    <div class="fields" aria-label="每張車趟卡片整理的欄位">
+      <i class="solid">即時／預約</i><i class="solid">距離</i><i class="solid">預計抵達</i>
+      <i>上車地址</i><i>下車地址</i><i>多點下車</i><i>預約時間</i><i>備註</i><i>來源群組</i><i>派單人</i>
+    </div>
+  </div>
+</section>
+
+<div class="checker" role="presentation"></div>
+
+<!-- ═══ 功能規格銘牌:黑帶 ═══ -->
+<section class="band band-ink" id="spec">
+  <div class="wrap">
+    <h2 class="rise">看得懂各種派單，<br>回覆也幫你準備好。</h2>
+    <dl class="plate">
+      <div class="plate-row"><dt>自動抓車趟</dt><dd>從大量 LINE 訊息中找出真正的派單，集中在同一個畫面。<b>不用一直滑群組。</b></dd></div>
+      <div class="plate-row"><dt>過濾聊天公告</dt><dd>費率說明、招募訊息、司機回覆、謝派收到已到，自動排除、越用越乾淨。</dd></div>
+      <div class="plate-row"><dt>派單格式</dt><dd>即時單、預約單、無符號地址、上下車符號、到／至／往、多點車趟、地標、超商門市、社區、醫院、各車隊排版。<b>不用管派單怎麼打。</b></dd></div>
+      <div class="plate-row"><dt>一鍵快速回覆</dt><dd>點 5／10／15 分或自訂，自動開啟正確群組、標記派單人、帶入路名與分鐘。</dd></div>
+      <div class="plate-row"><dt>距離與預計抵達</dt><dd>顯示目前位置到上車地的距離與預計抵達時間，更快判斷這張單適不適合接。</dd></div>
+      <div class="plate-row"><dt>快捷時間自訂</dt><dd>即時單快捷分鐘、預約單準時／晚到時間都能在設定中改，照你的區域習慣調。</dd></div>
+      <div class="plate-row"><dt>多群組集中</dt><dd>十幾個群組的車趟集中在一個 App 裡看，歷史紀錄隨時回查。</dd></div>
+      <div class="plate-row"><dt>持續更新</dt><dd>新的派單格式、地標、門市名稱持續加入辨識，App 內建更新通知。</dd></div>
+    </dl>
+    <p class="plate-note">實話先說：我們<b>不宣稱 100% 無錯</b>。寧可漏抓，不可亂抓；每一筆回報都讓辨識越來越準。</p>
+  </div>
+</section>
+
+<div class="checker" role="presentation"></div>
+
+<!-- ═══ 接單八步:黃帶(真實序列) ═══ -->
+<section class="band" id="steps">
+  <div class="wrap">
+    <h2 class="rise">從看到車趟到完成回覆，<br>只要幾秒。</h2>
+    <div class="steps">
+      <div class="step"><span class="n num">1</span><div><b>LINE 群組出現新車趟</b><span>你不用盯著群組看</span></div></div>
+      <div class="step"><span class="n num">2</span><div><b>TripRadar 自動辨識</b><span>判斷是不是派單、即時或預約</span></div></div>
+      <div class="step"><span class="n num">3</span><div><b>車趟卡片跳出來</b><span>上下車、距離、預計抵達時間一眼看完</span></div></div>
+      <div class="step"><span class="n num">4</span><div><b>點選分鐘按鈕</b><span>5／10／15 分或自訂</span></div></div>
+      <div class="step"><span class="n num">5</span><div><b>App 開啟原本的群組</b><span>不用自己翻</span></div></div>
+      <div class="step"><span class="n num">6</span><div><b>自動標記派單人</b><span>@ 對的人，不用手動找</span></div></div>
+      <div class="step"><span class="n num">7</span><div><b>自動帶入回覆文字</b><span>路名＋分鐘已經打好</span></div></div>
+      <div class="step"><span class="n num">8</span><div><b>確認後送出</b><span>最後一步由你決定，不誤發</span></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="checker" role="presentation"></div>
+
+<!-- ═══ 司機回饋:黑帶 ═══ -->
+<section class="band band-ink" id="voice">
+  <div class="wrap">
+    <h2 class="rise">用過的司機怎麼說</h2>
+    <div class="quotes">
+      <blockquote class="quote"><p>以前一直切 LINE 群組，眼睛都花了。現在只看 App，車趟自己跳出來。</p><footer><b>陳大哥</b>雙北・入行 8 年</footer></blockquote>
+      <blockquote class="quote"><p>少漏很多張單，回覆也快很多，點一下就標記好派單人。</p><footer><b>阿凱</b>桃園・機場接送為主</footer></blockquote>
+      <blockquote class="quote"><p>開車不用一直刷群組，輕鬆很多，也比較不會分心。</p><footer><b>小周</b>台中・夜班司機</footer></blockquote>
+      <blockquote class="quote"><p>一張單就可能賺回一天的費用，這個帳很好算。</p><footer><b>老練</b>高雄・多群組接單</footer></blockquote>
+    </div>
+    <p class="quotes-note">＊回饋整理自使用者回報，實際效益依個人使用情況而異。</p>
+  </div>
+</section>
+
+<div class="checker" role="presentation"></div>
+
+<!-- ═══ 計費表定價:黃帶 ═══ -->
+<section class="band" id="price">
+  <div class="wrap">
+    <div style="text-align:center;max-width:34em;margin-inline:auto">
+      <h2 class="rise">前 100 名創始會員，<br>用最低價鎖定。</h2>
+      <p style="margin-top:18px;font-size:clamp(16px,2.2vw,18.5px);font-weight:500;color:var(--on-cab-mute)">先用 <b style="color:var(--ink)">NT$599</b> 解鎖 30 天完整體驗，滿意再升級年費，<b style="color:var(--ink)">599 元全額折抵</b>，一毛不浪費。</p>
+      <div class="seats-line">
+        <div class="rooflight" role="status" aria-label="創始會員名額">
+          <span class="rl-label">已 售 <span class="num" data-seats="sold">0</span> ／ <span class="num" data-seats="total">100</span>・剩 餘</span>
+          <span class="rl-num"><span data-seats="left">100</span><small>名</small></span>
         </div>
-        <p class="demo-cap">訊息進來 → 自動抓單 → 點分鐘 → 跳回群組完成回覆</p>
       </div>
     </div>
+
+    <div class="ladder" aria-label="價格階梯:越晚加入越貴">
+      <div class="rung now"><span>前 100 名・首年</span><span style="display:flex;align-items:center;gap:14px"><span class="price-sm num">NT$7,990</span><span class="when">現在</span></span></div>
+      <div class="rung"><span>第 101 名起・首年</span><span style="display:flex;align-items:center;gap:14px"><span class="price-sm num">NT$9,990</span><span class="when">售完後</span></span></div>
+      <div class="rung"><span>產品成熟後正式價</span><span style="display:flex;align-items:center;gap:14px"><span class="price-sm num">NT$11,990</span><span class="when">未來</span></span></div>
+    </div>
+
+    <div class="meters">
+      <div class="meter">
+        <span class="m-name">30 天體驗</span>
+        <span class="m-price num">599<small>元／30天</small></span>
+        <span class="m-day">平均一天約 NT$20</span>
+        <span class="m-per">完整功能・只收一次，不是月費。可全額折抵創始會員年費。</span>
+        <a class="btn btn-ink" href="https://line.me/R/ti/p/%40493watvi" target="_blank" rel="noopener">先用 599 體驗</a>
+      </div>
+      <div class="meter hero-meter">
+        <span class="tab">前 100 名限定</span>
+        <span class="m-name">創始會員・首年</span>
+        <span class="m-orig">正式價 <span class="num">NT$11,990</span></span>
+        <span class="m-price num" data-countup="7990">7,990<small>元／首年</small></span>
+        <span class="m-day">平均一天約 NT$22</span>
+        <span class="m-per">先買過 599 體驗？全額折抵，一毛不重複收。</span>
+        <a class="btn btn-cab" href="https://line.me/R/ti/p/%40493watvi" target="_blank" rel="noopener">成為創始會員 →</a>
+      </div>
+      <div class="meter">
+        <span class="m-name">月方案</span>
+        <span class="m-price num">1,299<small>元／月</small></span>
+        <span class="m-day">平均一天約 NT$43</span>
+        <span class="m-per">短期彈性，隨時可轉創始年費。</span>
+        <a class="btn btn-ink" href="https://line.me/R/ti/p/%40493watvi" target="_blank" rel="noopener">選擇月方案</a>
+      </div>
+    </div>
+
+    <p class="price-hint">NT$599 為 <b>30 天一次性體驗費（非月費）</b>；30 天內升級創始會員，599 元全額折抵（7,990 − 599 = 實付 NT$7,391，比正式價省 NT$4,000）。<br>創始會員售完後恢復 NT$9,990、正式上市價 NT$11,990。<b>越早加入越划算。</b></p>
   </div>
 </section>
 
-<!-- 2. 痛點 -->
-<section id="pain">
+<div class="checker" role="presentation"></div>
+
+<!-- ═══ FAQ:黑帶 ═══ -->
+<section class="band band-ink" id="faq">
   <div class="wrap">
-    <div class="center">
-      <span class="eyebrow">司機痛點</span>
-      <h2>你是不是每天都在做這些事？</h2>
-    </div>
-    <div class="pains reveal">
-      <div class="pain"><span class="x">✕</span>LINE 群組太多，一直切來切去</div>
-      <div class="pain"><span class="x">✕</span>一天幾千則訊息，公告比車趟還多</div>
-      <div class="pain"><span class="x">✕</span>開車時還要一直盯手機</div>
-      <div class="pain"><span class="x">✕</span>好不容易看到車趟，別人已經接走</div>
-      <div class="pain"><span class="x">✕</span>派單格式每個群組都不一樣</div>
-      <div class="pain"><span class="x">✕</span>漏掉一張好單，可能就是幾百元收入</div>
-      <div class="pain"><span class="x">✕</span>看到地址還要自己判斷距離、時間與方向</div>
-      <div class="pain"><span class="x">✕</span>回覆還要重新找群組、標記派單人、輸入文字</div>
-    </div>
-    <p class="pain-emo">不是沒有單，<br>是訊息太多，讓你<span>根本來不及看</span>。</p>
-  </div>
-</section>
-
-<hr class="divider">
-
-<!-- 3. 解決方案 -->
-<section id="how">
-  <div class="wrap">
-    <div class="center">
-      <span class="eyebrow">解決方案</span>
-      <h2>把 LINE 訊息<br>整理成真正的車趟。</h2>
-    </div>
-    <div class="flow reveal">
-      <div class="flow-step">LINE 群組訊息<small>通知進來的每一則</small></div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-step">AI 判斷派單<small>即時／預約分類</small></div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-step">整理成車趟卡片<small>上下車・距離・預計抵達</small></div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-step hot">一鍵快速回覆<small>跳回群組・標記派單人</small></div>
-    </div>
-    <p class="center" style="color:var(--muted);font-size:14.5px;margin-bottom:14px">每張車趟卡片都幫你整理好：</p>
-    <div class="cardfields reveal">
-      <span class="chip hot">即時／預約</span><span class="chip">預約時間</span><span class="chip">上車地址</span>
-      <span class="chip">下車地址</span><span class="chip">多點下車</span><span class="chip">備註</span>
-      <span class="chip hot">距離</span><span class="chip hot">預計抵達</span><span class="chip">來源群組</span><span class="chip">派單人</span>
-    </div>
-  </div>
-</section>
-
-<hr class="divider">
-
-<!-- 4. 影片 -->
-<section id="video">
-  <div class="wrap">
-    <div class="center">
-      <span class="eyebrow">真實畫面</span>
-      <h2>從看到車趟到完成回覆，只要幾秒。</h2>
-      <p class="lead">App 實機操作畫面：車趟卡片自動整理、點分鐘直接回覆。</p>
-    </div>
-    <div class="vidgrid reveal">
-      <figure class="vidphone">
-        <video src="assets/demo.mp4" autoplay muted loop playsinline preload="metadata" aria-label="App 實機操作畫面：車趟卡片與快速回覆"></video>
-        <figcaption>抓單 → 車趟卡片 → 點分鐘接單</figcaption>
-      </figure>
-    </div>
-  </div>
-</section>
-
-<hr class="divider">
-
-<!-- 5. 功能 -->
-<section id="feat">
-  <div class="wrap">
-    <div class="center">
-      <span class="eyebrow">核心功能</span>
-      <h2>看得懂各種派單，<br>回覆也幫你準備好。</h2>
-    </div>
-    <div class="feats">
-      <div class="feat reveal">
-        <span class="ico"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="8.5" stroke="#FFB23E" stroke-width="1.6"/><path d="M11 11L16.5 6.5" stroke="#FFB23E" stroke-width="1.6" stroke-linecap="round"/></svg></span>
-        <h3>自動抓車趟</h3>
-        <p>不用一直滑群組。App 從大量 LINE 訊息中找出真正的派單，集中顯示在同一個畫面。</p>
-      </div>
-      <div class="feat reveal">
-        <span class="ico"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3.5 5.5h15M6.5 11h9M9 16.5h4" stroke="#FFB23E" stroke-width="1.6" stroke-linecap="round"/></svg></span>
-        <h3>自動過濾聊天與公告</h3>
-        <p>群組公告、費率說明、招募訊息、司機回覆、謝派收到已到……通通自動排除，只留下有用的車趟。</p>
-      </div>
-      <div class="feat reveal">
-        <span class="ico"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 17.5V8.5l7-4.5 7 4.5v9" stroke="#FFB23E" stroke-width="1.6" stroke-linejoin="round"/><path d="M8.5 17.5v-4.5h5v4.5" stroke="#FFB23E" stroke-width="1.6"/></svg></span>
-        <h3>支援多種派單格式</h3>
-        <ul>
-          <li>即時單</li><li>預約單</li><li>無符號地址</li><li>上下車符號</li><li>到／至／往</li>
-          <li>多點車趟</li><li>地標</li><li>超商門市</li><li>社區</li><li>醫院</li><li>各車隊排版</li>
-        </ul>
-        <p class="feat-quote">不用管派單怎麼打，TripRadar 幫你看懂。</p>
-      </div>
-      <div class="feat reveal">
-        <span class="ico"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3.5 11a7.5 7.5 0 1 1 3.2 6.1L3.5 18.5l1-4.3" stroke="#FFB23E" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
-        <h3>一鍵快速回覆</h3>
-        <p>直接點 5 分／10 分／15 分或自訂分鐘，App 自動開啟正確 LINE 群組、標記派單人、帶入路名與分鐘，減少手動輸入。</p>
-      </div>
-      <div class="feat reveal">
-        <span class="ico"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="8" stroke="#FFB23E" stroke-width="1.6"/><path d="M11 6.5v4.5l3.5 2" stroke="#FFB23E" stroke-width="1.6" stroke-linecap="round"/></svg></span>
-        <h3>自訂快捷時間</h3>
-        <p>即時單快捷分鐘、預約單準時／晚到時間都能在設定中更改，依你所在區域自行調整。</p>
-      </div>
-      <div class="feat reveal">
-        <span class="ico"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 18.5s-6.5-4.8-6.5-9.5a6.5 6.5 0 1 1 13 0c0 4.7-6.5 9.5-6.5 9.5z" stroke="#FFB23E" stroke-width="1.6"/><circle cx="11" cy="9" r="2.2" stroke="#FFB23E" stroke-width="1.6"/></svg></span>
-        <h3>距離與預計抵達</h3>
-        <p>顯示目前位置到上車地的距離與預計抵達時間，更快判斷這張單適不適合接。</p>
-      </div>
-      <div class="feat reveal">
-        <span class="ico"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3.5" y="3.5" width="6.5" height="6.5" rx="2" stroke="#FFB23E" stroke-width="1.6"/><rect x="12" y="3.5" width="6.5" height="6.5" rx="2" stroke="#FFB23E" stroke-width="1.6"/><rect x="3.5" y="12" width="6.5" height="6.5" rx="2" stroke="#FFB23E" stroke-width="1.6"/><rect x="12" y="12" width="6.5" height="6.5" rx="2" stroke="#FFB23E" stroke-width="1.6"/></svg></span>
-        <h3>多群組集中管理</h3>
-        <p>不用在十幾個 LINE 群組之間切換，所有抓到的車趟集中在同一個 App 裡查看。</p>
-      </div>
-      <div class="feat reveal">
-        <span class="ico"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="4" y="4" width="14" height="14" rx="2" stroke="#FFB23E" stroke-width="1.6"/><path d="M7.5 9h7M7.5 12.5h4.5" stroke="#FFB23E" stroke-width="1.6" stroke-linecap="round"/></svg></span>
-        <h3>車趟歷史紀錄</h3>
-        <p>過去車趟、已接車趟、來源群組、派單時間與上下車資訊，隨時回頭查。</p>
-      </div>
-      <div class="feat reveal">
-        <span class="ico"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 3.5v6l4.3 2.2" stroke="#FFB23E" stroke-width="1.6" stroke-linecap="round"/><path d="M18.5 11a7.5 7.5 0 1 1-2.2-5.3M18.5 3.5v3.2h-3.2" stroke="#FFB23E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        <h3>持續更新辨識能力</h3>
-        <p>車隊出現新的派單格式、地標或門市名稱，持續優化辨識規則，支援更多真實派單格式。</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<hr class="divider">
-
-<!-- 6. 步驟 -->
-<section id="steps">
-  <div class="wrap">
-    <div class="center">
-      <span class="eyebrow">一鍵接單流程</span>
-      <h2>從看到車趟到完成回覆，<br>只要幾秒。</h2>
-    </div>
-    <div class="steps reveal">
-      <div class="step"><span class="n num">1</span><div class="body"><b>LINE 群組出現新車趟</b><span>你不用盯著群組看</span></div></div>
-      <div class="step"><span class="n num">2</span><div class="body"><b>TripRadar 自動辨識</b><span>判斷是不是派單、即時或預約</span></div></div>
-      <div class="step"><span class="n num">3</span><div class="body"><b>車趟卡片顯示上下車、距離與預計抵達時間</b><span>一眼判斷適不適合接</span></div></div>
-      <div class="step"><span class="n num">4</span><div class="body"><b>點選分鐘按鈕</b><span>5／10／15 分或自訂</span></div></div>
-      <div class="step"><span class="n num">5</span><div class="body"><b>App 開啟原本的 LINE 群組</b><span>不用自己翻群組</span></div></div>
-      <div class="step"><span class="n num">6</span><div class="body"><b>自動標記派單人</b><span>@ 對的人，不用手動找</span></div></div>
-      <div class="step"><span class="n num">7</span><div class="body"><b>自動帶入回覆文字</b><span>路名＋分鐘已經打好</span></div></div>
-      <div class="step"><span class="n num">8</span><div class="body"><b>確認後送出</b><span>最後一步由你決定，不誤發</span></div></div>
-    </div>
-  </div>
-</section>
-
-<hr class="divider">
-
-<!-- 7. 效益 -->
-<section id="gain">
-  <div class="wrap">
-    <div class="center">
-      <span class="eyebrow">使用效益</span>
-      <h2>省下來的不只是時間，<br>還有更多接單機會。</h2>
-    </div>
-    <div class="gains reveal">
-      <div class="gain"><span class="ck">✓</span><div>少滑 LINE</div></div>
-      <div class="gain"><span class="ck">✓</span><div>少看無關訊息</div></div>
-      <div class="gain"><span class="ck">✓</span><div>少漏好單</div></div>
-      <div class="gain"><span class="ck">✓</span><div>少做重複操作</div></div>
-      <div class="gain"><span class="ck">✓</span><div>更快判斷車趟</div></div>
-      <div class="gain"><span class="ck">✓</span><div>更快回覆派單</div></div>
-      <div class="gain"><span class="ck">✓</span><div>降低開車分心</div></div>
-      <div class="gain"><span class="ck">✓</span><div>提高接單效率</div></div>
-    </div>
-    <p class="gain-main">一天少滑 <em>1～3 小時</em> LINE，<br>把時間留給真正能賺錢的車趟。</p>
-  </div>
-</section>
-
-<hr class="divider">
-
-<!-- 8. 見證 -->
-<section id="voice">
-  <div class="wrap">
-    <div class="center">
-      <span class="eyebrow">司機回饋</span>
-      <h2>用過的司機怎麼說</h2>
-    </div>
-    <div class="quotes reveal">
-      <div class="quote"><div class="mk">"</div><p>以前一直切 LINE 群組，眼睛都花了。現在只看 App，車趟自己跳出來。</p><div class="who"><span class="av">陳</span><b>陳大哥・雙北</b>入行 8 年</div></div>
-      <div class="quote"><div class="mk">"</div><p>少漏很多張單，回覆也快很多，點一下就標記好派單人。</p><div class="who"><span class="av">凱</span><b>阿凱・桃園</b>機場接送為主</div></div>
-      <div class="quote"><div class="mk">"</div><p>開車不用一直刷群組，輕鬆很多，也比較不會分心。</p><div class="who"><span class="av">周</span><b>小周・台中</b>夜班司機</div></div>
-      <div class="quote"><div class="mk">"</div><p>一張單就可能賺回一天的費用，這個帳很好算。</p><div class="who"><span class="av">練</span><b>老練・高雄</b>多群組接單</div></div>
-    </div>
-    <p class="quotes-note">＊回饋內容整理自使用者回報，實際效益依個人使用情況而異。</p>
-  </div>
-</section>
-
-<hr class="divider">
-
-<!-- 9. 收費方案 -->
-<section id="price">
-  <div class="wrap">
-    <div class="center">
-      <span class="eyebrow">限量創始會員</span>
-      <h2>前 100 名創始會員，<br>用<span class="grad">最低價</span>鎖定 TripRadar。</h2>
-      <p class="lead center">先用 <b style="color:var(--text)">NT$599</b> 解鎖 30 天完整體驗，滿意再升級年費，<b style="color:var(--accent)">599 元全額折抵</b>，一毛不浪費。</p>
-      <div class="seats-wrap">
-        <span class="seats"><span class="seats-dot"></span>創始會員 <b><span data-seats="sold">—</span>/<span data-seats="total">100</span></b>・剩 <b><span data-seats="left">—</span> 位</b>・售完即恢復標準年費</span>
-      </div>
-    </div>
-
-    <!-- 價格階梯：越晚加入越貴 -->
-    <div class="ladder reveal">
-      <div class="rung now"><span>前 100 名創始會員・首年 <b>NT$7,990</b></span><span class="when">現在</span></div>
-      <div class="rung"><span>第 101 名起・首年 <b>NT$9,990</b></span><span class="when">售完後</span></div>
-      <div class="rung"><span>產品成熟後正式價・<b>NT$11,990</b></span><span class="when">未來</span></div>
-    </div>
-
-    <div class="plans">
-      <div class="plan">
-        <span class="pname">30 天體驗</span>
-        <span class="price num">NT$599<small>／30天</small></span>
-        <span class="perday">平均一天約 <b>NT$20</b></span>
-        <span class="per">完整功能・只收一次，不是月費</span>
-        <span class="save">可全額折抵創始會員年費</span>
-        <a class="btn btn-ghost" href="#contact">先用 599 體驗</a>
-      </div>
-
-      <div class="plan featured">
-        <span class="ribbon">前 100 名限定</span>
-        <span class="pname">創始會員・首年</span>
-        <span class="orig num">正式價 NT$11,990</span>
-        <span class="price num">NT$7,990<small>／首年</small></span>
-        <span class="perday">平均一天約 <b>NT$22</b>・折抵後約 NT$20</span>
-        <span class="per">已付 599 折抵後，實際再付 <b style="color:var(--text)">NT$7,391</b></span>
-        <span class="save">比正式價省 NT$4,000</span>
-        <a class="btn btn-amber" href="#contact">成為創始會員 →</a>
-      </div>
-
-      <div class="plan">
-        <span class="pname">月方案</span>
-        <span class="price num">NT$1,299<small>／月</small></span>
-        <span class="perday">平均一天約 <b>NT$43</b></span>
-        <span class="per">短期彈性・隨時可轉創始年費</span>
-        <span class="save">&nbsp;</span>
-        <a class="btn btn-ghost" href="#contact">選擇月方案</a>
-      </div>
-    </div>
-
-    <p class="price-hint">
-      NT$599 為 <b>30 天一次性體驗費（非月費）</b>；30 天內升級創始會員，599 元全額折抵。<br>
-      創始會員售完後恢復 NT$9,990、正式上市價 NT$11,990。<b>越早加入越划算。</b>
-    </p>
-  </div>
-</section>
-
-<hr class="divider">
-
-<!-- 10. FAQ -->
-<section id="faq">
-  <div class="wrap">
-    <div class="center">
-      <span class="eyebrow">常見問題</span>
-      <h2>購買前，先看這裡</h2>
-    </div>
-    <div class="faq reveal">
+    <h2 class="rise">購買前，先看這裡</h2>
+    <div class="faq">
       <details><summary>需要 Root 手機嗎？</summary><div class="a">不需要。TripRadar 使用 Android 系統提供的「通知讀取」與「無障礙服務」權限運作，不需要 Root、不修改系統、不影響其他 App。</div></details>
       <details><summary>支援哪些 Android 手機？</summary><div class="a">支援 Android 8.0 以上的 Android 手機，已在多款主流品牌實測。iPhone（iOS）目前不支援。</div></details>
       <details><summary>需要一直開著 App 嗎？</summary><div class="a">不用一直開著畫面，但需要授予通知讀取權限並允許背景執行。首次安裝時會引導你完成省電白名單設定，之後 App 會在背景幫你盯車趟。</div></details>
-      <details><summary>會不會讀到私人聊天？</summary><div class="a">App 讀取的是 LINE 通知內容，用途只有一個：判斷是不是派單並整理成車趟。訊息解析在手機本機進行，僅授權驗證與距離計算所需的必要資料會與伺服器溝通。權限用途與資料處理範圍詳見隱私權政策。</div></details>
-      <details><summary>所有群組格式都抓得到嗎？</summary><div class="a">已支援大量真實派單格式，並持續更新。遇到特殊格式可以直接回報，我們會協助優化辨識規則。我們不宣稱 100% 無錯,但每一筆回報都會讓辨識越來越準。</div></details>
+      <details><summary>會不會讀到私人聊天？</summary><div class="a">App 讀取的是 LINE 通知內容，用途只有一個：判斷是不是派單並整理成車趟。訊息解析在手機本機進行，僅授權驗證與距離計算所需的必要資料會與伺服器溝通。有疑問加官方 LINE 直接問。</div></details>
+      <details><summary>所有群組格式都抓得到嗎？</summary><div class="a">已支援大量真實派單格式，並持續更新。遇到特殊格式可以直接回報，我們會協助優化辨識規則。我們不宣稱 100% 無錯，但每一筆回報都會讓辨識越來越準。</div></details>
       <details><summary>換手機怎麼辦？</summary><div class="a">授權綁定裝置。換手機時聯絡客服，協助你解除舊裝置綁定並在新手機重新開通，授權天數不受影響。</div></details>
-      <details><summary>如何更新 App？</summary><div class="a">App 內建更新通知，有新版本時會提示，依畫面指示下載安裝即可，不需要重新設定。</div></details>
       <details><summary>付款後如何開通？</summary><div class="a">付款完成後由客服為你開通授權並協助綁定裝置，一般在營業時間內即可完成，開通後立即可用。</div></details>
-      <details><summary>可以退款嗎？</summary><div class="a">購買前可先聯絡客服申請體驗，確認手機與群組環境適用後再付款。退款與取消政策詳見服務條款。</div></details>
+      <details><summary>可以退款嗎？</summary><div class="a">購買前可先聯絡客服申請體驗，確認手機與群組環境適用後再付款。退款細節加官方 LINE 詢問即可。</div></details>
     </div>
   </div>
 </section>
 
-<hr class="divider">
+<div class="checker" role="presentation"></div>
 
-<!-- 11. 信任 -->
-<section id="trust">
+<!-- ═══ 聯絡:黃帶 ═══ -->
+<section class="band" id="contact">
   <div class="wrap">
-    <div class="center">
-      <span class="eyebrow">信任與安全</span>
-      <h2>權限做什麼、資料去哪裡，<br>都寫清楚。</h2>
-    </div>
-    <div class="trust reveal">
-      <a href="#privacy">隱私權政策</a>
-      <a href="#terms">服務條款</a>
-      <a href="#permissions">權限用途說明</a>
-      <a href="#contact">聯絡客服</a>
-      <a href="#changelog">版本更新紀錄</a>
-      <a href="#refund">試用／退款政策</a>
-      <a href="#data">資料處理說明</a>
-      <a href="#faq">常見問題</a>
-    </div>
-    <p class="disclaim">TripRadar 為獨立開發之輔助工具，與 LINE 官方無隸屬、合作或背書關係。<br>LINE 為 LY Corporation 之商標。</p>
-  </div>
-</section>
-
-<hr class="divider">
-
-<!-- 11.5 購買・聯絡 -->
-<section id="contact">
-  <div class="wrap">
-    <div class="center">
-      <span class="eyebrow">購買・聯絡</span>
-      <h2>加 LINE，<br>由專人協助開通。</h2>
-      <p class="lead center">創始會員名額有限，加入官方 LINE 即可諮詢、付款與開通授權。</p>
-    </div>
-    <div class="contact-card reveal">
-      <div class="qr">
-        <img src="assets/QRCODE.png" alt="TripRadar 官方 LINE QR Code" width="220" height="220"
-             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="qr-ph" style="display:none">請將官方 LINE 的<br>QR 圖片存成<br><b>assets/line-qr.png</b></div>
-      </div>
-      <div class="contact-info">
-        <span class="ci-label">官方 LINE 帳號</span>
-        <div class="ci-id">
+    <h2 class="rise" style="text-align:center">加 LINE，由專人協助開通。</h2>
+    <div class="contact-grid">
+      <figure class="qr-card">
+        <img src="assets/QRCODE.png" alt="TripRadar 官方 LINE 加好友 QR Code" width="218" height="218">
+        <figcaption>掃描加入官方 LINE</figcaption>
+      </figure>
+      <div class="c-info">
+        <div class="c-id">
           <span class="num">@493watvi</span>
-          <button class="copy" type="button" data-copy="@493watvi" aria-label="複製 LINE ID">複製</button>
+          <button class="copy" type="button" data-copy="@493watvi" aria-label="複製 LINE ID">複製 ID</button>
         </div>
-        <a class="btn btn-amber" href="https://line.me/R/ti/p/%40493watvi" target="_blank" rel="noopener">加入 LINE 好友 →</a>
-        <p class="ci-note">掃描左方 QR，或在 LINE 搜尋 ID <b>@493watvi</b>（含 @ 符號）即可加入。</p>
+        <a class="btn btn-ink" href="https://line.me/R/ti/p/%40493watvi" target="_blank" rel="noopener">加入 LINE 好友 →</a>
+        <p class="c-note">掃描 QR，或在 LINE 搜尋 ID <b>@493watvi</b>（含 @ 符號）。諮詢、付款、開通授權都在這裡完成。</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 12. 最終 CTA -->
-<section class="final">
+<div class="checker" role="presentation"></div>
+
+<!-- ═══ 尾聲:黑帶 ═══ -->
+<section class="band band-ink final">
   <div class="wrap">
-    <div class="inner reveal">
-      <h2>今天開始，<br>不用再一直刷 LINE。</h2>
-      <p class="lead">讓 TripRadar 幫你盯車趟，你只需要專心判斷、快速接單。</p>
-      <div class="final-ctas">
-        <a class="btn btn-amber" href="#price">成為創始會員 →</a>
-        <a class="btn btn-ghost" href="#contact">聯絡客服</a>
-      </div>
+    <h2 class="rise">今天開始，<br>不用再一直刷 LINE。</h2>
+    <p class="lead">讓 TripRadar 幫你盯車趟。你負責開車，剩下的交給它。</p>
+    <div style="display:flex;gap:14px;flex-wrap:wrap">
+      <a class="btn btn-cab" href="#price">成為創始會員 →</a>
+      <a class="btn btn-hollow" href="#contact">聯絡客服</a>
+    </div>
+    <div class="legal">
+      © 2026 TripRadar 車趟輔助・獨立開發之輔助工具，與 LINE 官方無隸屬、合作或背書關係。LINE 為 LY Corporation 之商標。<br>
+      <a href="#faq">常見問題</a>・隱私權政策與服務條款頁面籌備中，相關問題請洽官方 LINE
     </div>
   </div>
 </section>
-
-<footer>
-  <div class="wrap">
-    © 2026 TripRadar 車趟輔助・獨立開發之輔助工具，與 LINE 官方無隸屬、合作或背書關係<br>
-    <a href="#privacy">隱私權政策</a>・<a href="#terms">服務條款</a>・<a href="#refund">退款政策</a>
-  </div>
-</footer>
+</main>
 
 <div class="stickybar" id="stickybar" aria-hidden="true">
-  <a class="btn btn-amber" href="#price">立即體驗</a>
-  <a class="btn btn-ghost" href="#contact">聯絡客服</a>
+  <a class="btn btn-line" href="https://line.me/R/ti/p/%40493watvi" target="_blank" rel="noopener">加 LINE 開通</a>
+  <a class="btn btn-hollow" href="#price">看方案</a>
 </div>
 
 <script type="application/ld+json">
@@ -773,11 +548,11 @@
 {"@type":"Question","name":"需要 Root 手機嗎？","acceptedAnswer":{"@type":"Answer","text":"不需要。TripRadar 使用 Android 系統提供的通知讀取與無障礙服務權限運作，不需要 Root、不修改系統。"}},
 {"@type":"Question","name":"支援哪些 Android 手機？","acceptedAnswer":{"@type":"Answer","text":"支援 Android 8.0 以上的 Android 手機，已在多款主流品牌實測。iPhone 目前不支援。"}},
 {"@type":"Question","name":"需要一直開著 App 嗎？","acceptedAnswer":{"@type":"Answer","text":"不用一直開著畫面，但需要授予通知讀取權限並允許背景執行，首次安裝會引導完成省電設定。"}},
-{"@type":"Question","name":"會不會讀到私人聊天？","acceptedAnswer":{"@type":"Answer","text":"App 讀取 LINE 通知內容僅用於判斷派單並整理成車趟，訊息解析在手機本機進行，詳見隱私權政策。"}},
+{"@type":"Question","name":"會不會讀到私人聊天？","acceptedAnswer":{"@type":"Answer","text":"App 讀取 LINE 通知內容僅用於判斷派單並整理成車趟，訊息解析在手機本機進行，有疑問可洽官方 LINE。"}},
 {"@type":"Question","name":"所有群組格式都抓得到嗎？","acceptedAnswer":{"@type":"Answer","text":"已支援大量真實派單格式並持續更新，特殊格式可回報協助優化。"}},
 {"@type":"Question","name":"換手機怎麼辦？","acceptedAnswer":{"@type":"Answer","text":"授權綁定裝置，換手機時聯絡客服協助轉移重新綁定，授權天數不受影響。"}},
 {"@type":"Question","name":"付款後如何開通？","acceptedAnswer":{"@type":"Answer","text":"付款完成後由客服開通授權並協助綁定裝置，開通後立即可用。"}},
-{"@type":"Question","name":"可以退款嗎？","acceptedAnswer":{"@type":"Answer","text":"購買前可先聯絡客服申請體驗，退款與取消政策詳見服務條款。"}}
+{"@type":"Question","name":"可以退款嗎？","acceptedAnswer":{"@type":"Answer","text":"購買前可先聯絡客服申請體驗，退款細節加官方 LINE 詢問即可。"}}
 ]}
 </script>
 
@@ -785,73 +560,76 @@
 /* ═══════════════════════════════════════════════════════
    ★★★ 創始會員名額(真實數字,手動維護)★★★
    每成交一位,把下面 SEATS_SOLD 的數字 +1,存檔 push 即可。
-   「剩餘名額」與所有顯示位置都會自動計算,不用改別處。
+   未滿 10 位前,頁面只顯示「限量 100 名」,不顯示已售/剩餘。
    ═══════════════════════════════════════════════════════ */
 const SEATS_SOLD  = 0;    // ← 只改這個:目前已售出幾位(填真實數字)
-const SEATS_TOTAL = 100;  // 總名額
+const SEATS_TOTAL = 100;
 
 (function seats(){
   const left = Math.max(0, SEATS_TOTAL - SEATS_SOLD);
+  const early = SEATS_SOLD < 10 && left > 0;   // 未滿10位:只顯示「限量」,不顯示已售/剩餘
   document.querySelectorAll("[data-seats]").forEach(el=>{
     const k = el.dataset.seats;
     el.textContent = k === "sold" ? SEATS_SOLD : k === "total" ? SEATS_TOTAL : left;
   });
-  if (left === 0){
-    document.querySelectorAll(".seats").forEach(el=>{ el.textContent = "創始會員名額已額滿・現行方案請洽官方 LINE"; });
-  }
+  document.querySelectorAll(".rooflight").forEach(el=>{
+    if (left === 0){
+      el.innerHTML = '<span class="rl-label">創 始 會 員</span><span class="rl-num" style="font-size:26px">已額滿</span>';
+    } else if (early){
+      el.innerHTML = '<span class="rl-label">前 1 0 0 名 優 惠</span><span class="rl-num">限量 100<small>名</small></span>';
+    }
+  });
 })();
 
-/* Hero 演示動畫 */
-(function demo(){
-  if (matchMedia("(prefers-reduced-motion: reduce)").matches){
-    document.querySelectorAll("#demo .msg").forEach(m=>m.classList.add("on"));
-    document.querySelector("#demo .dispatch").classList.add("hit");
-    document.getElementById("card").classList.add("on");
-    document.getElementById("reply").classList.add("on");
-    return;
-  }
-  const msgs=[...document.querySelectorAll("#demo .msg")];
-  const dispatch=document.querySelector("#demo .dispatch");
-  const sweep=document.getElementById("sweep"),card=document.getElementById("card"),reply=document.getElementById("reply"),tap=document.getElementById("tapbtn");
-  const timers=[],at=(ms,fn)=>timers.push(setTimeout(fn,ms));
-  function run(){
-    timers.length=0;
-    msgs.forEach(m=>m.classList.remove("on","hit"));
-    sweep.classList.remove("on");card.classList.remove("on");reply.classList.remove("on");tap.classList.remove("tap");
-    msgs.forEach(m=>at(400+(+m.dataset.t)*550,()=>m.classList.add("on")));
-    at(3400,()=>sweep.classList.add("on"));
-    at(4300,()=>dispatch.classList.add("hit"));
-    at(5000,()=>{sweep.classList.remove("on");card.classList.add("on")});
-    at(6300,()=>tap.classList.add("tap"));
-    at(7000,()=>reply.classList.add("on"));
-    at(10500,run);
-  }
-  run();
-})();
-
-/* 捲動顯示 + nav + 底部 CTA */
+/* 進場動畫(預設可見;JS 到場才播,headless 不空白) */
 (function(){
-  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.12});
-  document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
-  const nav=document.querySelector("header.nav");
-  const bar=document.getElementById("stickybar"),hero=document.querySelector(".hero"),priceSec=document.getElementById("price");
-  const upd=()=>{
-    nav.classList.toggle("scrolled",scrollY>10);
-    const past=hero.getBoundingClientRect().bottom<0;
-    const r=priceSec.getBoundingClientRect();
-    const inPrice=r.top<innerHeight&&r.bottom>0;
-    bar.classList.toggle("show",past&&!inPrice);
-    bar.setAttribute("aria-hidden",String(!(past&&!inPrice)));
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const io = new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); }
+  }),{threshold:.15});
+  document.querySelectorAll(".rise").forEach(el=>io.observe(el));
+})();
+
+/* 計費表跳錶:創始價滾動進場時數字跑上來 */
+(function(){
+  const el = document.querySelector("[data-countup]");
+  if(!el || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const target = +el.dataset.countup;
+  const small = el.querySelector("small");
+  const io = new IntersectionObserver(es=>{
+    if(!es[0].isIntersecting) return;
+    io.disconnect();
+    const t0 = performance.now(), dur = 900;
+    (function tick(t){
+      const p = Math.min(1,(t-t0)/dur), eased = 1-Math.pow(1-p,4);
+      el.firstChild.textContent = Math.round(target*eased).toLocaleString();
+      if(p<1) requestAnimationFrame(tick);
+      else el.firstChild.textContent = target.toLocaleString();
+    })(t0);
+  },{threshold:.5});
+  io.observe(el);
+})();
+
+/* 手機底部固定 CTA */
+(function(){
+  const bar = document.getElementById("stickybar");
+  const hero = document.querySelector(".hero");
+  const price = document.getElementById("price");
+  const contact = document.getElementById("contact");
+  const upd = ()=>{
+    const past = hero.getBoundingClientRect().bottom < 0;
+    const inP = [price,contact].some(s=>{const r=s.getBoundingClientRect();return r.top<innerHeight&&r.bottom>0});
+    bar.classList.toggle("show", past && !inP);
+    bar.setAttribute("aria-hidden", String(!(past && !inP)));
   };
-  addEventListener("scroll",upd,{passive:true});upd();
+  addEventListener("scroll", upd, {passive:true}); upd();
 })();
 
 /* 複製 LINE ID */
 document.querySelectorAll(".copy").forEach(b=>b.addEventListener("click",()=>{
-  const t=b.dataset.copy;
-  if(navigator.clipboard) navigator.clipboard.writeText(t).catch(()=>{});
-  const o=b.textContent;b.textContent="已複製";b.classList.add("done");
-  setTimeout(()=>{b.textContent=o;b.classList.remove("done")},1500);
+  if(navigator.clipboard) navigator.clipboard.writeText(b.dataset.copy).catch(()=>{});
+  const o=b.textContent; b.textContent="已複製 ✓"; b.classList.add("done");
+  setTimeout(()=>{ b.textContent=o; b.classList.remove("done"); },1500);
 }));
 </script>
 </body>
