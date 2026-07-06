@@ -147,7 +147,9 @@
   .msg.dispatch{color:var(--text);border:1px solid transparent;background:#1E242B}
   .msg.dispatch.on{opacity:1}
   .msg.dispatch.hit{border-color:var(--accent);background:#20262d}
-  .sweep{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;transform-origin:50% 50%;background:conic-gradient(from 0deg at 50% 50%,rgba(255,178,62,.22) 0deg,rgba(255,178,62,.06) 30deg,transparent 62%,transparent 360deg)}
+  .sweep{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;transform-origin:50% 50%;
+    background:conic-gradient(from 0deg at 50% 50%,rgba(255,178,62,.30) 0deg,rgba(255,178,62,.05) 40deg,transparent 55deg,transparent 360deg);
+    -webkit-mask:radial-gradient(circle at 50% 50%,#000 0 44%,transparent 66%);mask:radial-gradient(circle at 50% 50%,#000 0 44%,transparent 66%)}
   .sweep.on{opacity:1;animation:sweep 2.4s linear}
   @keyframes sweep{from{transform:rotate(0)}to{transform:rotate(720deg)}}
   .tripcard{
@@ -167,7 +169,7 @@
   .tc-btns{display:flex;gap:7px}
   .tc-btns button{flex:1;background:#232830;border:1px solid var(--line);color:var(--text);border-radius:7px;padding:10px 0;font-size:13.5px;font-weight:700;font-family:var(--font);transition:.18s;pointer-events:none}
   .tc-btns button.tap{background:var(--accent);color:var(--ink);border-color:transparent}
-  .replybub{position:absolute;right:13px;bottom:156px;max-width:78%;background:var(--green);color:#053017;border-radius:12px 4px 12px 12px;padding:9px 13px;font-size:13px;font-weight:700;opacity:0;transform:translateY(8px);transition:all .35s var(--ease)}
+  .replybub{position:absolute;right:13px;bottom:236px;z-index:5;max-width:78%;background:var(--green);color:#053017;border-radius:12px 4px 12px 12px;padding:9px 13px;font-size:13px;font-weight:700;opacity:0;transform:translateY(8px);transition:all .35s var(--ease);box-shadow:0 6px 20px rgba(0,0,0,.45)}
   .replybub.on{opacity:1;transform:none}
   .replybub small{display:block;font-weight:400;font-size:10px;opacity:.8;margin-top:1px}
   .demo-cap{margin-top:18px;text-align:center;font-size:13px;color:var(--faint)}
