@@ -37,9 +37,9 @@
     --text:#F2F6F8;
     --muted:#93A4B0;
     --muted2:#6B7E8B;
-    --accent:#2DD4BF;
-    --accent2:#06B6D4;
-    --accent-soft:rgba(45,212,191,.14);
+    --accent:#FFB23E;
+    --accent2:#FF8A2B;
+    --accent-soft:rgba(255,178,62,.14);
     --green:#22C55E;
     --line-green:#06C755;
     --red:#FF6B5C;
@@ -61,8 +61,8 @@
   body::before{
     content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
     background:
-      radial-gradient(720px 520px at 82% -6%,rgba(6,182,212,.16),transparent 60%),
-      radial-gradient(640px 640px at 6% 8%,rgba(45,212,191,.10),transparent 62%),
+      radial-gradient(720px 520px at 82% -6%,rgba(255,138,43,.16),transparent 60%),
+      radial-gradient(640px 640px at 6% 8%,rgba(255,178,62,.10),transparent 62%),
       radial-gradient(900px 700px at 50% 118%,rgba(6,199,85,.07),transparent 60%),
       var(--bg);
   }
@@ -84,14 +84,14 @@
   .num{font-variant-numeric:tabular-nums;letter-spacing:-.02em}
   .lead{color:var(--muted);font-size:clamp(15.5px,2.6vw,19px);max-width:36em;line-height:1.65}
   em.hl{font-style:normal;color:var(--accent);font-weight:inherit}
-  .grad{background:linear-gradient(120deg,#99F6E4,var(--accent) 40%,var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .grad{background:linear-gradient(120deg,#FFD07A,var(--accent) 40%,var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
   .center{text-align:center}
   .center .lead{margin-inline:auto}
   .eyebrow{
     display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;
     color:var(--accent);letter-spacing:.16em;text-transform:uppercase;
     padding:6px 14px;margin-bottom:20px;border-radius:999px;
-    background:var(--accent-soft);border:1px solid rgba(45,212,191,.28);
+    background:var(--accent-soft);border:1px solid rgba(255,178,62,.28);
   }
   .eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent)}
 
@@ -103,10 +103,10 @@
     font-family:var(--font);white-space:nowrap;
   }
   .btn-amber{
-    background:linear-gradient(135deg,#5EEAD4,var(--accent) 45%,var(--accent2));color:#1A1206;
-    box-shadow:0 8px 30px -6px rgba(45,212,191,.5),inset 0 1px 0 rgba(255,255,255,.4);
+    background:linear-gradient(135deg,#FFC760,var(--accent) 45%,var(--accent2));color:#1A1206;
+    box-shadow:0 8px 30px -6px rgba(255,178,62,.5),inset 0 1px 0 rgba(255,255,255,.4);
   }
-  .btn-amber:hover{transform:translateY(-2px);box-shadow:0 16px 44px -8px rgba(45,212,191,.62),inset 0 1px 0 rgba(255,255,255,.4)}
+  .btn-amber:hover{transform:translateY(-2px);box-shadow:0 16px 44px -8px rgba(255,178,62,.62),inset 0 1px 0 rgba(255,255,255,.4)}
   .btn-ghost{background:var(--surface);color:var(--text);border:1px solid var(--line2);backdrop-filter:blur(8px)}
   .btn-ghost:hover{border-color:rgba(255,255,255,.32);background:var(--surface2);transform:translateY(-2px)}
   .btn:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
@@ -118,7 +118,7 @@
   .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;font-family:var(--display);letter-spacing:-.01em}
   .logo small{font-size:12px;color:var(--muted);font-weight:400;font-family:var(--font);letter-spacing:0}
   @media(max-width:400px){.logo small{display:none}}
-  .logo .mark{filter:drop-shadow(0 0 8px rgba(45,212,191,.5))}
+  .logo .mark{filter:drop-shadow(0 0 8px rgba(255,178,62,.5))}
   .nav-links{display:none;gap:30px;font-size:14.5px;color:var(--muted);font-weight:500}
   .nav-links a{position:relative;transition:color .2s}
   .nav-links a:hover{color:var(--text)}
@@ -143,7 +143,7 @@
 
   /* 手機演示 */
   .demo-wrap{display:flex;justify-content:center;position:relative}
-  .demo-wrap::before{content:"";position:absolute;width:340px;height:340px;background:radial-gradient(circle,rgba(45,212,191,.22),transparent 70%);filter:blur(30px);z-index:0}
+  .demo-wrap::before{content:"";position:absolute;width:340px;height:340px;background:radial-gradient(circle,rgba(255,178,62,.22),transparent 70%);filter:blur(30px);z-index:0}
   .phone{
     position:relative;z-index:1;width:min(342px,86vw);border-radius:42px;padding:11px;
     background:linear-gradient(160deg,#161d24,#0b0f14);
@@ -160,20 +160,20 @@
   .msg.on{opacity:.5;transform:none}
   .msg.dispatch{color:var(--text);border:1px solid transparent;background:#1b2833}
   .msg.dispatch.on{opacity:1}
-  .msg.dispatch.hit{border-color:rgba(45,212,191,.55);box-shadow:0 0 0 3px rgba(45,212,191,.16);background:#22303c}
-  .sweep{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;background:conic-gradient(from 0deg at 50% 42%,rgba(45,212,191,.26) 0deg,transparent 66deg,transparent 360deg)}
+  .msg.dispatch.hit{border-color:rgba(255,178,62,.55);box-shadow:0 0 0 3px rgba(255,178,62,.16);background:#22303c}
+  .sweep{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;background:conic-gradient(from 0deg at 50% 42%,rgba(255,178,62,.26) 0deg,transparent 66deg,transparent 360deg)}
   .sweep.on{opacity:1;animation:sweep 1.6s linear}
   @keyframes sweep{from{transform:rotate(0)}to{transform:rotate(720deg)}}
   .tripcard{
     position:absolute;left:11px;right:11px;bottom:11px;
     background:linear-gradient(158deg,rgba(38,52,64,.96),rgba(22,30,38,.98));
-    border:1px solid rgba(45,212,191,.45);border-radius:20px;padding:15px;
+    border:1px solid rgba(255,178,62,.45);border-radius:20px;padding:15px;
     transform:translateY(120%);transition:transform .55s var(--ease);
     box-shadow:0 -14px 46px rgba(0,0,0,.55);backdrop-filter:blur(6px);
   }
   .tripcard.on{transform:none}
   .tc-top{display:flex;align-items:center;gap:8px;font-size:12px;margin-bottom:9px}
-  .badge{background:var(--accent-soft);color:var(--accent);border-radius:7px;padding:3px 9px;font-weight:700;border:1px solid rgba(45,212,191,.3)}
+  .badge{background:var(--accent-soft);color:var(--accent);border-radius:7px;padding:3px 9px;font-weight:700;border:1px solid rgba(255,178,62,.3)}
   .tc-src{color:var(--muted2)}
   .tc-route{font-size:14px;font-weight:600;display:grid;gap:5px;margin-bottom:9px}
   .tc-route i{font-style:normal;color:var(--muted2);font-weight:400;font-size:11.5px;margin-right:7px;display:inline-block;width:26px}
@@ -207,23 +207,23 @@
   @media(min-width:900px){.flow{grid-template-columns:repeat(7,1fr);align-items:center;gap:6px}}
   .flow-step{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 14px;font-size:14.5px;font-weight:700;text-align:center;position:relative}
   .flow-step small{display:block;font-weight:400;color:var(--muted2);font-size:12px;margin-top:3px;line-height:1.4}
-  .flow-step.hot{border-color:rgba(45,212,191,.5);background:linear-gradient(160deg,rgba(45,212,191,.1),var(--surface))}
+  .flow-step.hot{border-color:rgba(255,178,62,.5);background:linear-gradient(160deg,rgba(255,178,62,.1),var(--surface))}
   .flow-arrow{color:var(--accent);font-size:18px;text-align:center;line-height:1}
   @media(max-width:899px){.flow-arrow{transform:rotate(90deg)}}
   .cardfields{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin-top:10px}
   .chip{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:7px 16px;font-size:13.5px;color:#C4D0D8;transition:.2s}
   .chip:hover{border-color:var(--line2)}
-  .chip.hot{border-color:rgba(45,212,191,.5);color:var(--accent);background:var(--accent-soft)}
+  .chip.hot{border-color:rgba(255,178,62,.5);color:var(--accent);background:var(--accent-soft)}
 
   /* 功能 */
   .feats{display:grid;gap:16px;margin-top:40px}
   @media(min-width:700px){.feats{grid-template-columns:1fr 1fr}}
   @media(min-width:1000px){.feats{grid-template-columns:1fr 1fr 1fr}}
   .feat{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:26px;display:flex;flex-direction:column;gap:9px;overflow:hidden;transition:border-color .3s,transform .3s}
-  .feat::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;background:linear-gradient(150deg,rgba(45,212,191,.5),transparent 40%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .3s}
+  .feat::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;background:linear-gradient(150deg,rgba(255,178,62,.5),transparent 40%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .3s}
   .feat:hover{transform:translateY(-4px);border-color:transparent}
   .feat:hover::before{opacity:1}
-  .feat .ico{width:46px;height:46px;border-radius:13px;background:linear-gradient(150deg,rgba(45,212,191,.2),rgba(6,182,212,.08));border:1px solid rgba(45,212,191,.25);display:flex;align-items:center;justify-content:center;margin-bottom:6px}
+  .feat .ico{width:46px;height:46px;border-radius:13px;background:linear-gradient(150deg,rgba(255,178,62,.2),rgba(255,138,43,.08));border:1px solid rgba(255,178,62,.25);display:flex;align-items:center;justify-content:center;margin-bottom:6px}
   .feat p{color:var(--muted);font-size:14.5px;line-height:1.6}
   .feat ul{list-style:none;color:var(--muted);font-size:13.5px;display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
   .feat ul li{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:8px;padding:3px 10px}
@@ -235,7 +235,7 @@
   .step:last-child{padding-bottom:0}
   .step::before{content:"";position:absolute;left:17px;top:38px;bottom:0;width:2px;background:linear-gradient(var(--accent),transparent)}
   .step:last-child::before{display:none}
-  .step .n{flex:none;width:36px;height:36px;border-radius:11px;z-index:1;background:linear-gradient(150deg,rgba(45,212,191,.2),rgba(6,182,212,.06));border:1px solid rgba(45,212,191,.5);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;font-family:var(--display)}
+  .step .n{flex:none;width:36px;height:36px;border-radius:11px;z-index:1;background:linear-gradient(150deg,rgba(255,178,62,.2),rgba(255,138,43,.06));border:1px solid rgba(255,178,62,.5);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;font-family:var(--display)}
   .step .body b{display:block;font-size:16px;margin-bottom:2px}
   .step .body span{color:var(--muted);font-size:14px}
 
@@ -270,26 +270,26 @@
   .plan .orig{color:var(--muted2);text-decoration:line-through;font-size:14px}
   .plan .per{color:var(--muted);font-size:13.5px;min-height:20px}
   .plan .save{color:var(--accent);font-size:13.5px;font-weight:700}
-  .plan .perday{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;font-size:14px;font-weight:700;color:var(--accent);background:var(--accent-soft);border:1px solid rgba(45,212,191,.3);border-radius:999px;padding:5px 13px;margin:2px 0}
+  .plan .perday{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;font-size:14px;font-weight:700;color:var(--accent);background:var(--accent-soft);border:1px solid rgba(255,178,62,.3);border-radius:999px;padding:5px 13px;margin:2px 0}
   .plan .perday b{font-family:var(--display);font-weight:800}
   .plan .btn{margin-top:18px;width:100%}
-  .plan.featured{background:linear-gradient(165deg,rgba(45,212,191,.14),rgba(30,40,50,.6));border:1.5px solid rgba(45,212,191,.6);box-shadow:0 24px 60px -18px rgba(45,212,191,.28)}
+  .plan.featured{background:linear-gradient(165deg,rgba(255,178,62,.14),rgba(30,40,50,.6));border:1.5px solid rgba(255,178,62,.6);box-shadow:0 24px 60px -18px rgba(255,178,62,.28)}
   @media(min-width:900px){.plan.featured{transform:scale(1.05);z-index:1}.plan.featured:hover{transform:scale(1.05) translateY(-3px)}.plan.featured .price{font-size:46px}}
-  .plan .ribbon{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--accent),var(--accent2));color:#1A1206;font-size:12.5px;font-weight:800;border-radius:999px;padding:5px 18px;white-space:nowrap;box-shadow:0 8px 24px -6px rgba(45,212,191,.5)}
+  .plan .ribbon{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--accent),var(--accent2));color:#1A1206;font-size:12.5px;font-weight:800;border-radius:999px;padding:5px 18px;white-space:nowrap;box-shadow:0 8px 24px -6px rgba(255,178,62,.5)}
   .price-hint{text-align:center;margin-top:30px;color:var(--muted);font-size:14px;line-height:1.7}
   .price-hint b{color:var(--accent)}
   .plan .btn{margin-top:auto}
 
   /* 創始會員：名額限量條 + 價格階梯 */
   .seats-wrap{text-align:center;margin-top:26px}
-  .seats{display:inline-flex;align-items:center;gap:10px;padding:11px 22px;border-radius:999px;background:linear-gradient(135deg,rgba(45,212,191,.16),rgba(6,182,212,.06));border:1px solid rgba(45,212,191,.42);font-size:14px;font-weight:600;color:var(--text)}
+  .seats{display:inline-flex;align-items:center;gap:10px;padding:11px 22px;border-radius:999px;background:linear-gradient(135deg,rgba(255,178,62,.16),rgba(255,138,43,.06));border:1px solid rgba(255,178,62,.42);font-size:14px;font-weight:600;color:var(--text)}
   .seats b{color:var(--accent)}
   .seats-dot{width:9px;height:9px;border-radius:50%;background:var(--accent);flex:none;animation:pulse 2s infinite}
-  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(45,212,191,.5)}70%{box-shadow:0 0 0 9px rgba(45,212,191,0)}100%{box-shadow:0 0 0 0 rgba(45,212,191,0)}}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,178,62,.5)}70%{box-shadow:0 0 0 9px rgba(255,178,62,0)}100%{box-shadow:0 0 0 0 rgba(255,178,62,0)}}
   .ladder{max-width:580px;margin:42px auto 0;display:grid;gap:11px}
   .rung{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:15px 20px;border-radius:14px;background:var(--surface);border:1px solid var(--line);font-size:15px;color:var(--muted);transition:.25s}
   .rung b{color:var(--text);font-family:var(--display);font-weight:700;letter-spacing:-.01em}
-  .rung.now{background:linear-gradient(135deg,rgba(45,212,191,.15),var(--surface));border-color:rgba(45,212,191,.55);color:var(--text)}
+  .rung.now{background:linear-gradient(135deg,rgba(255,178,62,.15),var(--surface));border-color:rgba(255,178,62,.55);color:var(--text)}
   .rung.now b{color:var(--accent)}
   .rung .when{font-size:12px;padding:4px 12px;border-radius:999px;background:rgba(255,255,255,.08);color:var(--muted2);font-weight:700;white-space:nowrap;flex:none}
   .rung.now .when{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#1A1206;font-weight:800}
@@ -297,7 +297,7 @@
   /* FAQ */
   .faq{max-width:760px;margin:40px auto 0}
   .faq details{border:1px solid var(--line);border-radius:14px;background:var(--surface);margin-bottom:12px;overflow:hidden;transition:border-color .25s}
-  .faq details[open]{border-color:rgba(45,212,191,.4)}
+  .faq details[open]{border-color:rgba(255,178,62,.4)}
   .faq summary{cursor:pointer;list-style:none;padding:18px 20px;font-weight:700;font-size:15.5px;display:flex;justify-content:space-between;align-items:center;gap:12px}
   .faq summary::-webkit-details-marker{display:none}
   .faq summary::after{content:"+";color:var(--accent);font-size:22px;font-weight:300;flex:none;transition:transform .25s}
@@ -308,13 +308,13 @@
   .trust{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:38px}
   @media(min-width:760px){.trust{grid-template-columns:repeat(4,1fr)}}
   .trust a{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:17px;text-align:center;font-size:14px;font-weight:700;transition:.25s}
-  .trust a:hover{border-color:rgba(45,212,191,.5);transform:translateY(-2px)}
+  .trust a:hover{border-color:rgba(255,178,62,.5);transform:translateY(-2px)}
   .disclaim{margin-top:28px;border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:18px 20px;font-size:13.5px;color:var(--muted2);text-align:center;line-height:1.7}
 
   /* 購買・聯絡 */
   .contact-card{display:grid;gap:26px;max-width:760px;margin:44px auto 0;padding:28px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg)}
   @media(min-width:640px){.contact-card{grid-template-columns:auto 1fr;padding:36px}}
-  .qr{background:#fff;border-radius:18px;padding:14px;width:236px;max-width:100%;margin-inline:auto;aspect-ratio:1;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 40px -12px rgba(45,212,191,.35)}
+  .qr{background:#fff;border-radius:18px;padding:14px;width:236px;max-width:100%;margin-inline:auto;aspect-ratio:1;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 40px -12px rgba(255,178,62,.35)}
   .qr img{width:100%;height:auto;border-radius:6px;display:block}
   .qr-ph{width:100%;height:100%;align-items:center;justify-content:center;text-align:center;color:#5a6b78;font-size:13px;line-height:1.6}
   .contact-info{display:flex;flex-direction:column;gap:13px;text-align:center;align-items:center}
@@ -324,7 +324,7 @@
   .ci-id .num{font-size:clamp(26px,5.4vw,36px);font-weight:800;font-family:var(--display);color:var(--accent);letter-spacing:-.01em}
   .copy{background:var(--surface2);border:1px solid var(--line2);color:var(--text);border-radius:9px;padding:7px 15px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font);transition:.2s}
   .copy:hover{border-color:var(--accent);color:var(--accent)}
-  .copy.done{background:var(--accent);color:#052722;border-color:transparent}
+  .copy.done{background:var(--accent);color:#1A1408;border-color:transparent}
   .ci-note{font-size:13.5px;color:var(--muted);line-height:1.6}
   .ci-note b{color:var(--text)}
   .contact-info .btn{width:100%}
@@ -332,7 +332,7 @@
 
   /* 最終 CTA */
   .final{text-align:center;position:relative;overflow:hidden}
-  .final::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(680px 340px at 50% 0%,rgba(45,212,191,.18),transparent 68%);border-top:1px solid var(--line)}
+  .final::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(680px 340px at 50% 0%,rgba(255,178,62,.18),transparent 68%);border-top:1px solid var(--line)}
   .final .inner{border:1px solid var(--line);border-radius:28px;background:linear-gradient(180deg,rgba(255,255,255,.04),transparent);padding:clamp(40px,7vw,72px) 24px;backdrop-filter:blur(10px)}
   .final h2{font-size:clamp(28px,6vw,48px)}
   .final .lead{margin:18px auto 32px}
@@ -356,7 +356,7 @@
   @media(prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
     .msg,.msg.dispatch{opacity:1;transform:none;transition:none}
-    .msg.dispatch{border-color:rgba(45,212,191,.55)}
+    .msg.dispatch{border-color:rgba(255,178,62,.55)}
     .tripcard,.replybub{transform:none;opacity:1;transition:none}
     .sweep{display:none}
     .reveal{opacity:1;transform:none;transition:none}
@@ -372,9 +372,9 @@
   <div class="wrap nav-in">
     <a class="logo" href="#top" aria-label="TripRadar 回到頁首">
       <svg class="mark" width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
-        <circle cx="14" cy="14" r="12.4" stroke="#2DD4BF" stroke-width="1.6"/>
-        <circle cx="14" cy="14" r="7" stroke="#2DD4BF" stroke-width="1" opacity=".4"/>
-        <path d="M14 14 L23.5 8.5" stroke="#2DD4BF" stroke-width="1.7" stroke-linecap="round"/>
+        <circle cx="14" cy="14" r="12.4" stroke="#FFB23E" stroke-width="1.6"/>
+        <circle cx="14" cy="14" r="7" stroke="#FFB23E" stroke-width="1" opacity=".4"/>
+        <path d="M14 14 L23.5 8.5" stroke="#FFB23E" stroke-width="1.7" stroke-linecap="round"/>
         <circle cx="18.5" cy="17.5" r="2" fill="#06C755"/>
       </svg>
       TripRadar <small>車趟輔助</small>
@@ -498,8 +498,8 @@
       <p class="lead">以下為 App 真實操作錄影，非示意動畫。</p>
     </div>
     <figure class="glass reveal media-slot" style="aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:var(--muted);text-align:center;padding:24px;border-style:dashed;border-color:var(--line2)" aria-label="App 操作影片位置">
-      <span style="width:64px;height:64px;border-radius:50%;background:var(--accent-soft);border:1px solid rgba(45,212,191,.3);display:flex;align-items:center;justify-content:center">
-        <svg width="24" height="24" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z" fill="#2DD4BF"/></svg>
+      <span style="width:64px;height:64px;border-radius:50%;background:var(--accent-soft);border:1px solid rgba(255,178,62,.3);display:flex;align-items:center;justify-content:center">
+        <svg width="24" height="24" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z" fill="#FFB23E"/></svg>
       </span>
       <span style="font-size:14.5px">此處放 App 真實操作影片（10～20 秒）</span>
       <small style="font-size:12px;color:var(--muted2)">LINE 訊息 → 自動抓單 → 車趟卡片 → 點 5／10／15 分 → 跳回群組標記派單人</small>
@@ -524,17 +524,17 @@
     </div>
     <div class="feats">
       <div class="feat reveal">
-        <span class="ico"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="8.5" stroke="#2DD4BF" stroke-width="1.6"/><path d="M11 11L16.5 6.5" stroke="#2DD4BF" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+        <span class="ico"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="8.5" stroke="#FFB23E" stroke-width="1.6"/><path d="M11 11L16.5 6.5" stroke="#FFB23E" stroke-width="1.6" stroke-linecap="round"/></svg></span>
         <h3>自動抓車趟</h3>
         <p>不用一直滑群組。App 從大量 LINE 訊息中找出真正的派單，集中顯示在同一個畫面。</p>
       </div>
       <div class="feat reveal">
-        <span class="ico"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3.5 5.5h15M6.5 11h9M9 16.5h4" stroke="#2DD4BF" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+        <span class="ico"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3.5 5.5h15M6.5 11h9M9 16.5h4" stroke="#FFB23E" stroke-width="1.6" stroke-linecap="round"/></svg></span>
         <h3>自動過濾聊天與公告</h3>
         <p>群組公告、費率說明、招募訊息、司機回覆、謝派收到已到……通通自動排除，只留下有用的車趟。</p>
       </div>
       <div class="feat reveal">
-        <span class="ico"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 17.5V8.5l7-4.5 7 4.5v9" stroke="#2DD4BF" stroke-width="1.6" stroke-linejoin="round"/><path d="M8.5 17.5v-4.5h5v4.5" stroke="#2DD4BF" stroke-width="1.6"/></svg></span>
+        <span class="ico"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 17.5V8.5l7-4.5 7 4.5v9" stroke="#FFB23E" stroke-width="1.6" stroke-linejoin="round"/><path d="M8.5 17.5v-4.5h5v4.5" stroke="#FFB23E" stroke-width="1.6"/></svg></span>
         <h3>支援多種派單格式</h3>
         <ul>
           <li>即時單</li><li>預約單</li><li>無符號地址</li><li>上下車符號</li><li>到／至／往</li>
@@ -543,32 +543,32 @@
         <p class="feat-quote">不用管派單怎麼打，TripRadar 幫你看懂。</p>
       </div>
       <div class="feat reveal">
-        <span class="ico"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3.5 11a7.5 7.5 0 1 1 3.2 6.1L3.5 18.5l1-4.3" stroke="#2DD4BF" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+        <span class="ico"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3.5 11a7.5 7.5 0 1 1 3.2 6.1L3.5 18.5l1-4.3" stroke="#FFB23E" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
         <h3>一鍵快速回覆</h3>
         <p>直接點 5 分／10 分／15 分或自訂分鐘，App 自動開啟正確 LINE 群組、標記派單人、帶入路名與分鐘，減少手動輸入。</p>
       </div>
       <div class="feat reveal">
-        <span class="ico"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="8" stroke="#2DD4BF" stroke-width="1.6"/><path d="M11 6.5v4.5l3.5 2" stroke="#2DD4BF" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+        <span class="ico"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="8" stroke="#FFB23E" stroke-width="1.6"/><path d="M11 6.5v4.5l3.5 2" stroke="#FFB23E" stroke-width="1.6" stroke-linecap="round"/></svg></span>
         <h3>自訂快捷時間</h3>
         <p>即時單快捷分鐘、預約單準時／晚到時間都能在設定中更改，依你所在區域自行調整。</p>
       </div>
       <div class="feat reveal">
-        <span class="ico"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 18.5s-6.5-4.8-6.5-9.5a6.5 6.5 0 1 1 13 0c0 4.7-6.5 9.5-6.5 9.5z" stroke="#2DD4BF" stroke-width="1.6"/><circle cx="11" cy="9" r="2.2" stroke="#2DD4BF" stroke-width="1.6"/></svg></span>
+        <span class="ico"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 18.5s-6.5-4.8-6.5-9.5a6.5 6.5 0 1 1 13 0c0 4.7-6.5 9.5-6.5 9.5z" stroke="#FFB23E" stroke-width="1.6"/><circle cx="11" cy="9" r="2.2" stroke="#FFB23E" stroke-width="1.6"/></svg></span>
         <h3>距離與 ETA</h3>
         <p>顯示目前位置到上車地的距離與預估到達時間，更快判斷這張單適不適合接。</p>
       </div>
       <div class="feat reveal">
-        <span class="ico"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3.5" y="3.5" width="6.5" height="6.5" rx="2" stroke="#2DD4BF" stroke-width="1.6"/><rect x="12" y="3.5" width="6.5" height="6.5" rx="2" stroke="#2DD4BF" stroke-width="1.6"/><rect x="3.5" y="12" width="6.5" height="6.5" rx="2" stroke="#2DD4BF" stroke-width="1.6"/><rect x="12" y="12" width="6.5" height="6.5" rx="2" stroke="#2DD4BF" stroke-width="1.6"/></svg></span>
+        <span class="ico"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3.5" y="3.5" width="6.5" height="6.5" rx="2" stroke="#FFB23E" stroke-width="1.6"/><rect x="12" y="3.5" width="6.5" height="6.5" rx="2" stroke="#FFB23E" stroke-width="1.6"/><rect x="3.5" y="12" width="6.5" height="6.5" rx="2" stroke="#FFB23E" stroke-width="1.6"/><rect x="12" y="12" width="6.5" height="6.5" rx="2" stroke="#FFB23E" stroke-width="1.6"/></svg></span>
         <h3>多群組集中管理</h3>
         <p>不用在十幾個 LINE 群組之間切換，所有抓到的車趟集中在同一個 App 裡查看。</p>
       </div>
       <div class="feat reveal">
-        <span class="ico"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="4" y="4" width="14" height="14" rx="2" stroke="#2DD4BF" stroke-width="1.6"/><path d="M7.5 9h7M7.5 12.5h4.5" stroke="#2DD4BF" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+        <span class="ico"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="4" y="4" width="14" height="14" rx="2" stroke="#FFB23E" stroke-width="1.6"/><path d="M7.5 9h7M7.5 12.5h4.5" stroke="#FFB23E" stroke-width="1.6" stroke-linecap="round"/></svg></span>
         <h3>車趟歷史紀錄</h3>
         <p>過去車趟、已接車趟、來源群組、派單時間與上下車資訊，隨時回頭查。</p>
       </div>
       <div class="feat reveal">
-        <span class="ico"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 3.5v6l4.3 2.2" stroke="#2DD4BF" stroke-width="1.6" stroke-linecap="round"/><path d="M18.5 11a7.5 7.5 0 1 1-2.2-5.3M18.5 3.5v3.2h-3.2" stroke="#2DD4BF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="ico"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 3.5v6l4.3 2.2" stroke="#FFB23E" stroke-width="1.6" stroke-linecap="round"/><path d="M18.5 11a7.5 7.5 0 1 1-2.2-5.3M18.5 3.5v3.2h-3.2" stroke="#FFB23E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         <h3>持續更新辨識能力</h3>
         <p>車隊出現新的派單格式、地標或門市名稱，持續優化辨識規則，支援更多真實派單格式。</p>
       </div>

@@ -1,13 +1,13 @@
 <svg width="360" height="80" viewBox="0 0 360 80" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="TripRadar 車趟輔助">
   <defs>
     <linearGradient id="tealGrad" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#5EEAD4"/>
-      <stop offset="0.5" stop-color="#2DD4BF"/>
-      <stop offset="1" stop-color="#06B6D4"/>
+      <stop offset="0" stop-color="#FFC760"/>
+      <stop offset="0.5" stop-color="#FFB23E"/>
+      <stop offset="1" stop-color="#FF8A2B"/>
     </linearGradient>
     <radialGradient id="sweepGrad" cx="0.5" cy="0.5" r="0.5">
-      <stop offset="0" stop-color="#2DD4BF" stop-opacity="0.55"/>
-      <stop offset="1" stop-color="#2DD4BF" stop-opacity="0"/>
+      <stop offset="0" stop-color="#FFB23E" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#FFB23E" stop-opacity="0"/>
     </radialGradient>
   </defs>
 
@@ -18,12 +18,12 @@
     <!-- 外圈 -->
     <circle cx="0" cy="0" r="31" stroke="url(#tealGrad)" stroke-width="2.4"/>
     <!-- 內圈 -->
-    <circle cx="0" cy="0" r="19" stroke="#2DD4BF" stroke-width="1.2" opacity="0.42"/>
-    <circle cx="0" cy="0" r="8" stroke="#2DD4BF" stroke-width="1.1" opacity="0.28"/>
+    <circle cx="0" cy="0" r="19" stroke="#FFB23E" stroke-width="1.2" opacity="0.42"/>
+    <circle cx="0" cy="0" r="8" stroke="#FFB23E" stroke-width="1.1" opacity="0.28"/>
     <!-- 掃描線 -->
     <path d="M0 0 L29 -14.5" stroke="url(#tealGrad)" stroke-width="2.6" stroke-linecap="round"/>
     <!-- 中心點 -->
-    <circle cx="0" cy="0" r="2.6" fill="#2DD4BF"/>
+    <circle cx="0" cy="0" r="2.6" fill="#FFB23E"/>
     <!-- LINE 綠 blip -->
     <circle cx="11" cy="12" r="3.4" fill="#06C755"/>
   </g>
