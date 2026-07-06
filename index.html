@@ -375,7 +375,7 @@
       <div class="hero-strip">
         <div class="kpi"><b class="num">2<em>小時</em></b><span>每天少滑 LINE</span></div>
         <div class="sep"></div>
-        <div class="kpi"><b class="num">100<em>名</em></b><span>限量創始會員</span></div>
+        <div class="kpi"><b class="num"><span data-seats="left">—</span><em>名</em></b><span>創始會員剩餘名額</span></div>
         <div class="sep"></div>
         <div class="kpi"><b class="num">599<em>元</em></b><span>解鎖 30 天體驗</span></div>
       </div>
@@ -616,7 +616,7 @@
       <h2>前 100 名創始會員，<br>用<span class="grad">最低價</span>鎖定 TripRadar。</h2>
       <p class="lead center">先用 <b style="color:var(--text)">NT$599</b> 解鎖 30 天完整體驗，滿意再升級年費 —— <b style="color:var(--accent)">599 元全額折抵</b>，一毛不浪費。</p>
       <div class="seats-wrap">
-        <span class="seats"><span class="seats-dot"></span>創始會員名額 <b>限量 100 名</b>・售完即恢復標準年費</span>
+        <span class="seats"><span class="seats-dot"></span>創始會員 <b><span data-seats="sold">—</span>/<span data-seats="total">100</span></b>・剩 <b><span data-seats="left">—</span> 位</b>・售完即恢復標準年費</span>
       </div>
     </div>
 
@@ -780,6 +780,25 @@
 </script>
 
 <script>
+/* ═══════════════════════════════════════════════════════
+   ★★★ 創始會員名額(真實數字,手動維護)★★★
+   每成交一位,把下面 SEATS_SOLD 的數字 +1,存檔 push 即可。
+   「剩餘名額」與所有顯示位置都會自動計算,不用改別處。
+   ═══════════════════════════════════════════════════════ */
+const SEATS_SOLD  = 0;    // ← 只改這個:目前已售出幾位(填真實數字)
+const SEATS_TOTAL = 100;  // 總名額
+
+(function seats(){
+  const left = Math.max(0, SEATS_TOTAL - SEATS_SOLD);
+  document.querySelectorAll("[data-seats]").forEach(el=>{
+    const k = el.dataset.seats;
+    el.textContent = k === "sold" ? SEATS_SOLD : k === "total" ? SEATS_TOTAL : left;
+  });
+  if (left === 0){
+    document.querySelectorAll(".seats").forEach(el=>{ el.textContent = "創始會員名額已額滿・現行方案請洽官方 LINE"; });
+  }
+})();
+
 /* Hero 演示動畫 */
 (function demo(){
   if (matchMedia("(prefers-reduced-motion: reduce)").matches){
