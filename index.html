@@ -10,8 +10,8 @@
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#0A0E12">
 <link rel="canonical" href="https://s878787-code.github.io/line-trip_web/">
-<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="assets/icon-192.png" sizes="192x192" type="image/png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <meta property="og:site_name" content="TripRadar 車趟輔助">
 <meta property="og:url" content="https://s878787-code.github.io/line-trip_web/">
@@ -147,8 +147,8 @@
   .msg.dispatch{color:var(--text);border:1px solid transparent;background:#1E242B}
   .msg.dispatch.on{opacity:1}
   .msg.dispatch.hit{border-color:var(--accent);background:#20262d}
-  .sweep{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;background:conic-gradient(from 0deg at 50% 42%,rgba(255,178,62,.18) 0deg,transparent 62%,transparent 360deg)}
-  .sweep.on{opacity:1;animation:sweep 1.6s linear}
+  .sweep{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;transform-origin:50% 50%;background:conic-gradient(from 0deg at 50% 50%,rgba(255,178,62,.22) 0deg,rgba(255,178,62,.06) 30deg,transparent 62%,transparent 360deg)}
+  .sweep.on{opacity:1;animation:sweep 2.4s linear}
   @keyframes sweep{from{transform:rotate(0)}to{transform:rotate(720deg)}}
   .tripcard{
     position:absolute;left:11px;right:11px;bottom:11px;
@@ -175,6 +175,10 @@
   /* 通用面板:實心、1px 邊、克制圓角,無毛玻璃 */
   .glass{background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
   .media-slot{max-width:900px;margin:40px auto 0}
+  .vidgrid{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:40px}
+  .vidphone{width:min(290px,78vw);display:flex;flex-direction:column;gap:12px}
+  .vidphone video{width:100%;aspect-ratio:9/19.5;object-fit:cover;border-radius:22px;border:1px solid var(--line-2);background:#000;display:block}
+  .vidphone figcaption{text-align:center;font-size:13px;color:var(--faint)}
   .shots{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:32px auto 0;max-width:900px}
   @media(min-width:760px){.shots{grid-template-columns:repeat(4,1fr)}}
 
@@ -345,12 +349,7 @@
 <header class="nav" id="top">
   <div class="wrap nav-in">
     <a class="logo" href="#top" aria-label="TripRadar 回到頁首">
-      <svg class="mark" width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
-        <circle cx="14" cy="14" r="12.4" stroke="#FFB23E" stroke-width="1.6"/>
-        <circle cx="14" cy="14" r="7" stroke="#FFB23E" stroke-width="1" opacity=".4"/>
-        <path d="M14 14 L23.5 8.5" stroke="#FFB23E" stroke-width="1.7" stroke-linecap="round"/>
-        <circle cx="18.5" cy="17.5" r="2" fill="#06C755"/>
-      </svg>
+      <img class="mark" src="assets/app-icon.png" width="30" height="30" alt="" style="border-radius:7px">
       TripRadar <small>車趟輔助</small>
     </a>
     <nav class="nav-links" aria-label="頁內導覽">
@@ -467,22 +466,13 @@
 <section id="video">
   <div class="wrap">
     <div class="center">
-      <span class="eyebrow">真實畫面</span>
+      <span class="eyebrow">操作流程</span>
       <h2>從看到車趟到完成回覆，只要幾秒。</h2>
-      <p class="lead">以下為 App 真實操作錄影，非示意動畫。</p>
+      <p class="lead">上方 Hero 的示範動畫即為完整流程；實機操作影片整理中，將以測試資料錄製、不含真實客戶資訊後補上。</p>
     </div>
-    <figure class="glass reveal media-slot" style="aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:var(--muted);text-align:center;padding:24px;border-style:dashed;border-color:var(--line2)" aria-label="App 操作影片位置">
-      <span style="width:64px;height:64px;border-radius:50%;background:var(--accent-soft);border:1px solid rgba(255,178,62,.3);display:flex;align-items:center;justify-content:center">
-        <svg width="24" height="24" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z" fill="#FFB23E"/></svg>
-      </span>
-      <span style="font-size:14.5px">此處放 App 真實操作影片（10～20 秒）</span>
-      <small style="font-size:12px;color:var(--muted2)">LINE 訊息 → 自動抓單 → 車趟卡片 → 點 5／10／15 分 → 跳回群組標記派單人</small>
-    </figure>
-    <div class="shots reveal">
-      <div class="glass" style="aspect-ratio:9/17;display:flex;align-items:center;justify-content:center;color:var(--muted2);font-size:13px;text-align:center;padding:14px;border-style:dashed;border-color:var(--line2)">真實截圖：<br>車趟列表<br>（即時／預約標示）</div>
-      <div class="glass" style="aspect-ratio:9/17;display:flex;align-items:center;justify-content:center;color:var(--muted2);font-size:13px;text-align:center;padding:14px;border-style:dashed;border-color:var(--line2)">真實截圖：<br>車趟卡片<br>（距離與 ETA）</div>
-      <div class="glass" style="aspect-ratio:9/17;display:flex;align-items:center;justify-content:center;color:var(--muted2);font-size:13px;text-align:center;padding:14px;border-style:dashed;border-color:var(--line2)">真實截圖：<br>自動跳轉 LINE<br>標記派單人</div>
-      <div class="glass" style="aspect-ratio:9/17;display:flex;align-items:center;justify-content:center;color:var(--muted2);font-size:13px;text-align:center;padding:14px;border-style:dashed;border-color:var(--line2)">真實截圖：<br>設定頁／歷史紀錄</div>
+    <div class="media-slot glass reveal" style="aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:28px;border-style:dashed;border-color:var(--line-2)">
+      <span style="font-size:15px;color:var(--muted);font-weight:600">App 實機操作影片整理中</span>
+      <small style="font-size:12.5px;color:var(--faint);line-height:1.6">LINE 訊息 → 自動抓單 → 車趟卡片 → 點 5／10／15 分 → 跳回群組標記派單人</small>
     </div>
   </div>
 </section>
