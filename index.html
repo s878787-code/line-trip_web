@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>TripRadar 車趟輔助 — 不用一直刷 LINE，真正的車趟直接送到你眼前</title>
-<meta name="description" content="TripRadar 車趟輔助 — 職業司機的 AI 接單助手。自動辨識 LINE 群組派單、整理上下車與距離 ETA、一鍵跳回群組標記派單人。每天少滑 2 小時 LINE，多接幾張車趟。">
+<meta name="description" content="TripRadar 車趟輔助 — 職業司機的 AI 接單助手。自動辨識 LINE 群組派單、整理上下車、距離與預計抵達時間、一鍵跳回群組標記派單人。每天少滑 2 小時 LINE，多接幾張車趟。">
 <meta property="og:title" content="TripRadar 車趟輔助 — 不用一直刷 LINE，真正的車趟直接送到你眼前">
-<meta property="og:description" content="前 100 名創始會員首年 NT$7,990，NT$599 解鎖 30 天完整體驗、可全額折抵。自動辨識 LINE 群組派單、整理上下車與距離 ETA、一鍵回覆。">
+<meta property="og:description" content="前 100 名創始會員首年 NT$7,990，NT$599 解鎖 30 天完整體驗、可全額折抵。自動辨識 LINE 群組派單、整理上下車、距離與預計抵達時間、一鍵回覆。">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#0A0E12">
 <link rel="canonical" href="https://s878787-code.github.io/line-trip_web/">
@@ -367,7 +367,7 @@
     <div>
       <span class="eyebrow">職業司機的 AI 接單助手</span>
       <h1>不用一直刷 LINE，<br>真正的車趟<br><span class="grad">直接送到你眼前。</span></h1>
-      <p class="lead">每天十幾個 LINE 群組、幾千則訊息，TripRadar 自動辨識車趟、整理上下車與距離 ETA，讓你少漏單、快速回覆、專心開車。</p>
+      <p class="lead">每天十幾個 LINE 群組、幾千則訊息，TripRadar 自動辨識車趟、整理上下車、距離與預計抵達時間，讓你少漏單、快速回覆、專心開車。</p>
       <div class="hero-ctas">
         <a class="btn btn-amber" href="#price">立即體驗 →</a>
         <a class="btn btn-ghost" href="#video">觀看操作影片</a>
@@ -449,7 +449,7 @@
       <div class="flow-arrow">→</div>
       <div class="flow-step">AI 判斷派單<small>即時／預約分類</small></div>
       <div class="flow-arrow">→</div>
-      <div class="flow-step">整理成車趟卡片<small>上下車・距離・ETA</small></div>
+      <div class="flow-step">整理成車趟卡片<small>上下車・距離・預計抵達</small></div>
       <div class="flow-arrow">→</div>
       <div class="flow-step hot">一鍵快速回覆<small>跳回群組・標記派單人</small></div>
     </div>
@@ -457,7 +457,7 @@
     <div class="cardfields reveal">
       <span class="chip hot">即時／預約</span><span class="chip">預約時間</span><span class="chip">上車地址</span>
       <span class="chip">下車地址</span><span class="chip">多點下車</span><span class="chip">備註</span>
-      <span class="chip hot">距離</span><span class="chip hot">預估到達</span><span class="chip">來源群組</span><span class="chip">派單人</span>
+      <span class="chip hot">距離</span><span class="chip hot">預計抵達</span><span class="chip">來源群組</span><span class="chip">派單人</span>
     </div>
   </div>
 </section>
@@ -522,8 +522,8 @@
       </div>
       <div class="feat reveal">
         <span class="ico"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 18.5s-6.5-4.8-6.5-9.5a6.5 6.5 0 1 1 13 0c0 4.7-6.5 9.5-6.5 9.5z" stroke="#FFB23E" stroke-width="1.6"/><circle cx="11" cy="9" r="2.2" stroke="#FFB23E" stroke-width="1.6"/></svg></span>
-        <h3>距離與 ETA</h3>
-        <p>顯示目前位置到上車地的距離與預估到達時間，更快判斷這張單適不適合接。</p>
+        <h3>距離與預計抵達</h3>
+        <p>顯示目前位置到上車地的距離與預計抵達時間，更快判斷這張單適不適合接。</p>
       </div>
       <div class="feat reveal">
         <span class="ico"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3.5" y="3.5" width="6.5" height="6.5" rx="2" stroke="#FFB23E" stroke-width="1.6"/><rect x="12" y="3.5" width="6.5" height="6.5" rx="2" stroke="#FFB23E" stroke-width="1.6"/><rect x="3.5" y="12" width="6.5" height="6.5" rx="2" stroke="#FFB23E" stroke-width="1.6"/><rect x="12" y="12" width="6.5" height="6.5" rx="2" stroke="#FFB23E" stroke-width="1.6"/></svg></span>
@@ -556,7 +556,7 @@
     <div class="steps reveal">
       <div class="step"><span class="n num">1</span><div class="body"><b>LINE 群組出現新車趟</b><span>你不用盯著群組看</span></div></div>
       <div class="step"><span class="n num">2</span><div class="body"><b>TripRadar 自動辨識</b><span>判斷是不是派單、即時或預約</span></div></div>
-      <div class="step"><span class="n num">3</span><div class="body"><b>車趟卡片顯示上下車、距離與 ETA</b><span>一眼判斷適不適合接</span></div></div>
+      <div class="step"><span class="n num">3</span><div class="body"><b>車趟卡片顯示上下車、距離與預計抵達時間</b><span>一眼判斷適不適合接</span></div></div>
       <div class="step"><span class="n num">4</span><div class="body"><b>點選分鐘按鈕</b><span>5／10／15 分或自訂</span></div></div>
       <div class="step"><span class="n num">5</span><div class="body"><b>App 開啟原本的 LINE 群組</b><span>不用自己翻群組</span></div></div>
       <div class="step"><span class="n num">6</span><div class="body"><b>自動標記派單人</b><span>@ 對的人，不用手動找</span></div></div>
