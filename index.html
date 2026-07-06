@@ -14,18 +14,12 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#141008">
-<link rel="canonical" href="https://s878787-code.github.io/line-trip_web/">
-<meta property="og:url" content="https://s878787-code.github.io/line-trip_web/">
-<meta property="og:image:alt" content="TripRadar 車趟輔助 — 白牌司機的 AI 接單助手">
-<meta name="twitter:title" content="TripRadar 車趟輔助 — 不用一直刷 LINE，真正的車趟直接送到你眼前">
-<meta name="twitter:description" content="前 100 名創始會員首年 NT$7,990，NT$599 解鎖 30 天完整體驗、可全額折抵。">
-<meta name="twitter:image" content="https://s878787-code.github.io/line-trip_web/assets/og.png">
 <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="icon" href="assets/icon-192.png" sizes="192x192" type="image/png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
   :root{
     /* 計程車塗裝雙色世界 */
@@ -42,7 +36,7 @@
     --r:8px;
     --ease:cubic-bezier(.16,1,.3,1); /* ease-out-expo 系 */
     --font:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
-    --cond:"Barlow Condensed","Noto Sans TC","Arial Narrow",sans-serif;
+    --cond:"Barlow Condensed","Arial Narrow",sans-serif;
     /* z 階層 */
     --z-sticky:30; --z-bar:40;
   }
@@ -88,13 +82,7 @@
   .btn-cab:active{transform:translate(3px,3px);box-shadow:1px 1px 0 rgba(255,178,62,.22)}
   .btn-hollow{background:transparent;color:var(--on-ink);border-color:var(--on-ink)}
   .btn-hollow:hover{background:rgba(244,237,225,.08)}
-  .btn-hollow-ink{background:transparent;color:var(--ink);border-color:var(--ink);box-shadow:none}
-  .btn-hollow-ink:hover,.btn-hollow-ink:active{background:rgba(20,16,8,.08);transform:none;box-shadow:none}
-  .btn-line{background:var(--green);color:#fff;border-color:var(--green);box-shadow:none}
-  .btn-line:hover{background:#05B34C;border-color:#05B34C;transform:none}
-  .nav .btn:hover,.nav .btn:active,.stickybar .btn:hover,.stickybar .btn:active{transform:none;box-shadow:none}
-  .btn:focus-visible,a:focus-visible,summary:focus-visible,button:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
-  .band-ink :focus-visible,header.nav :focus-visible,.stickybar :focus-visible{outline-color:var(--cab)}
+  .btn:focus-visible,a:focus-visible,summary:focus-visible,button:focus-visible{outline:3px solid currentColor;outline-offset:3px}
 
   /* ── 導覽(黑) ── */
   header.nav{position:sticky;top:0;z-index:var(--z-bar);background:var(--ink);color:var(--on-ink);border-bottom:2px solid rgba(255,178,62,.35)}
@@ -118,7 +106,7 @@
     padding:8px 18px;font-weight:900;font-size:14.5px;letter-spacing:.02em;
     box-shadow:4px 4px 0 rgba(20,16,8,.25);
   }
-  .hero .kicker .dot{width:9px;height:9px;border-radius:50%;background:var(--cab);flex:none}
+  .hero .kicker .dot{width:9px;height:9px;border-radius:50%;background:var(--green);flex:none}
   .hero p.lead{margin:22px 0 30px;font-size:clamp(16.5px,2.4vw,19.5px);font-weight:500;color:var(--on-cab-mute);max-width:30em;line-height:1.75}
   .hero p.lead b{color:var(--ink)}
   .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
@@ -238,7 +226,7 @@
   .faq summary{cursor:pointer;list-style:none;padding:19px 4px;font-weight:900;font-size:17px;display:flex;justify-content:space-between;align-items:center;gap:14px}
   .faq summary::-webkit-details-marker{display:none}
   .faq summary::after{content:"＋";color:var(--cab);font-weight:400;font-size:20px;flex:none;transition:transform .2s var(--ease)}
-  .faq details[open] summary::after{transform:rotate(45deg)}
+  .faq details[open] summary::after{content:"－"}
   .faq .a{padding:0 4px 20px;color:var(--on-ink-mute);font-size:15.5px;line-height:1.75;max-width:62ch}
 
   /* ── 聯絡(黃帶) ── */
@@ -269,9 +257,9 @@
     position:fixed;left:0;right:0;bottom:0;z-index:var(--z-sticky);
     background:var(--ink);border-top:2px solid rgba(255,178,62,.4);
     padding:10px 16px calc(10px + env(safe-area-inset-bottom));
-    display:flex;gap:10px;transform:translateY(110%);visibility:hidden;transition:transform .3s var(--ease),visibility 0s .3s;
+    display:flex;gap:10px;transform:translateY(110%);transition:transform .3s var(--ease);
   }
-  .stickybar.show{transform:none;visibility:visible;transition:transform .3s var(--ease)}
+  .stickybar.show{transform:none}
   .stickybar .btn{flex:1;padding:13px 0;font-size:16px;box-shadow:none}
   @media(min-width:900px){.stickybar{display:none}}
 
@@ -279,10 +267,7 @@
   .rise{opacity:1}
   .rise.in{animation:rise .8s var(--ease) both}
   @keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
-  .hero .rise.in:nth-child(2){animation-delay:.05s}
-  .hero .rise.in:nth-child(3){animation-delay:.1s}
-  .hero .rise.in:nth-child(4){animation-delay:.15s}
-  .hero .rise.in:nth-child(5){animation-delay:.2s}
+  .hero .rise.in:nth-child(2){animation-delay:.06s}
   @media(prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
     .rise.in{animation:none}
@@ -315,7 +300,7 @@
       <p class="lead rise">每天十幾個群組、幾千則訊息。TripRadar 自動抓出真正的派單，整理好上下車、距離、預計抵達時間，<b>點一下就回覆</b>。你只要專心開車。</p>
       <div class="hero-ctas rise">
         <a class="btn btn-ink" href="#price">立即體驗 →</a>
-        <a class="btn btn-hollow-ink" href="#contact">LINE 諮詢</a>
+        <a class="btn btn-ink" style="background:transparent;color:var(--ink);box-shadow:none" href="#contact">LINE 諮詢</a>
       </div>
       <div class="rooflight rise" role="status" aria-label="創始會員剩餘名額">
         <span class="rl-label">創 始 會 員 剩 餘</span>
@@ -359,7 +344,7 @@
     <h2 class="rise">從一則訊息，<br>到一張能跑的車趟。</h2>
     <div class="route" aria-label="運作流程">
       <div class="stop"><span class="pt" aria-hidden="true"></span><div><b>LINE 群組訊息進來</b><span>通知進來的每一則，App 在背景看</span></div></div>
-      <div class="stop"><span class="pt" aria-hidden="true"></span><div><b>AI 判斷是不是派單</b><span>即時、預約、代駕自動分類，聊天公告自動略過</span></div></div>
+      <div class="stop"><span class="pt" aria-hidden="true"></span><div><b>AI 判斷是不是派單</b><span>即時、預約、代駕自動分類，聊天公告全部略過</span></div></div>
       <div class="stop"><span class="pt" aria-hidden="true"></span><div><b>整理成車趟卡片</b><span>上下車、距離、預計抵達時間，一張卡看完</span></div></div>
       <div class="stop"><span class="pt" aria-hidden="true"></span><div><b>點分鐘，直接回覆</b><span>跳回原群組、標記派單人、帶好文字，送出由你按</span></div></div>
     </div>
@@ -378,7 +363,7 @@
     <h2 class="rise">看得懂各種派單，<br>回覆也幫你準備好。</h2>
     <dl class="plate">
       <div class="plate-row"><dt>自動抓車趟</dt><dd>從大量 LINE 訊息中找出真正的派單，集中在同一個畫面。<b>不用一直滑群組。</b></dd></div>
-      <div class="plate-row"><dt>過濾聊天公告</dt><dd>費率說明、招募訊息、司機回覆、謝派收到已到，自動排除、越用越乾淨。</dd></div>
+      <div class="plate-row"><dt>過濾聊天公告</dt><dd>費率說明、招募訊息、司機回覆、謝派收到已到，通通自動排除。</dd></div>
       <div class="plate-row"><dt>派單格式</dt><dd>即時單、預約單、無符號地址、上下車符號、到／至／往、多點車趟、地標、超商門市、社區、醫院、各車隊排版。<b>不用管派單怎麼打。</b></dd></div>
       <div class="plate-row"><dt>一鍵快速回覆</dt><dd>點 5／10／15 分或自訂，自動開啟正確群組、標記派單人、帶入路名與分鐘。</dd></div>
       <div class="plate-row"><dt>距離與預計抵達</dt><dd>顯示目前位置到上車地的距離與預計抵達時間，更快判斷這張單適不適合接。</dd></div>
@@ -453,27 +438,27 @@
         <span class="m-price num">599<small>元／30天</small></span>
         <span class="m-day">平均一天約 NT$20</span>
         <span class="m-per">完整功能・只收一次，不是月費。可全額折抵創始會員年費。</span>
-        <a class="btn btn-ink" href="https://line.me/R/ti/p/%40493watvi" target="_blank" rel="noopener">先用 599 體驗</a>
+        <a class="btn btn-ink" href="#contact">先用 599 體驗</a>
       </div>
       <div class="meter hero-meter">
         <span class="tab">前 100 名限定</span>
         <span class="m-name">創始會員・首年</span>
-        <span class="m-orig">正式價 <span class="num">NT$11,990</span></span>
+        <span class="m-orig num">正式價 NT$11,990</span>
         <span class="m-price num" data-countup="7990">7,990<small>元／首年</small></span>
-        <span class="m-day">平均一天約 NT$22</span>
-        <span class="m-per">先買過 599 體驗？全額折抵，一毛不重複收。</span>
-        <a class="btn btn-cab" href="https://line.me/R/ti/p/%40493watvi" target="_blank" rel="noopener">成為創始會員 →</a>
+        <span class="m-day">平均一天約 NT$22・折抵後約 NT$20</span>
+        <span class="m-per">已付 599 折抵後實際再付 NT$7,391。比正式價省 NT$4,000。</span>
+        <a class="btn btn-cab" href="#contact">成為創始會員 →</a>
       </div>
       <div class="meter">
         <span class="m-name">月方案</span>
         <span class="m-price num">1,299<small>元／月</small></span>
         <span class="m-day">平均一天約 NT$43</span>
         <span class="m-per">短期彈性，隨時可轉創始年費。</span>
-        <a class="btn btn-ink" href="https://line.me/R/ti/p/%40493watvi" target="_blank" rel="noopener">選擇月方案</a>
+        <a class="btn btn-ink" href="#contact">選擇月方案</a>
       </div>
     </div>
 
-    <p class="price-hint">NT$599 為 <b>30 天一次性體驗費（非月費）</b>；30 天內升級創始會員，599 元全額折抵（7,990 − 599 = 實付 NT$7,391，比正式價省 NT$4,000）。<br>創始會員售完後恢復 NT$9,990、正式上市價 NT$11,990。<b>越早加入越划算。</b></p>
+    <p class="price-hint">NT$599 為 <b>30 天一次性體驗費（非月費）</b>；30 天內升級創始會員，599 元全額折抵。<br>創始會員售完後恢復 NT$9,990、正式上市價 NT$11,990。<b>越早加入越划算。</b></p>
   </div>
 </section>
 
@@ -487,11 +472,11 @@
       <details><summary>需要 Root 手機嗎？</summary><div class="a">不需要。TripRadar 使用 Android 系統提供的「通知讀取」與「無障礙服務」權限運作，不需要 Root、不修改系統、不影響其他 App。</div></details>
       <details><summary>支援哪些 Android 手機？</summary><div class="a">支援 Android 8.0 以上的 Android 手機，已在多款主流品牌實測。iPhone（iOS）目前不支援。</div></details>
       <details><summary>需要一直開著 App 嗎？</summary><div class="a">不用一直開著畫面，但需要授予通知讀取權限並允許背景執行。首次安裝時會引導你完成省電白名單設定，之後 App 會在背景幫你盯車趟。</div></details>
-      <details><summary>會不會讀到私人聊天？</summary><div class="a">App 讀取的是 LINE 通知內容，用途只有一個：判斷是不是派單並整理成車趟。訊息解析在手機本機進行，僅授權驗證與距離計算所需的必要資料會與伺服器溝通。有疑問加官方 LINE 直接問。</div></details>
+      <details><summary>會不會讀到私人聊天？</summary><div class="a">App 讀取的是 LINE 通知內容，用途只有一個：判斷是不是派單並整理成車趟。訊息解析在手機本機進行，僅授權驗證與距離計算所需的必要資料會與伺服器溝通。詳見隱私權政策。</div></details>
       <details><summary>所有群組格式都抓得到嗎？</summary><div class="a">已支援大量真實派單格式，並持續更新。遇到特殊格式可以直接回報，我們會協助優化辨識規則。我們不宣稱 100% 無錯，但每一筆回報都會讓辨識越來越準。</div></details>
       <details><summary>換手機怎麼辦？</summary><div class="a">授權綁定裝置。換手機時聯絡客服，協助你解除舊裝置綁定並在新手機重新開通，授權天數不受影響。</div></details>
       <details><summary>付款後如何開通？</summary><div class="a">付款完成後由客服為你開通授權並協助綁定裝置，一般在營業時間內即可完成，開通後立即可用。</div></details>
-      <details><summary>可以退款嗎？</summary><div class="a">購買前可先聯絡客服申請體驗，確認手機與群組環境適用後再付款。退款細節加官方 LINE 詢問即可。</div></details>
+      <details><summary>可以退款嗎？</summary><div class="a">購買前可先聯絡客服申請體驗，確認手機與群組環境適用後再付款。退款與取消政策詳見服務條款。</div></details>
     </div>
   </div>
 </section>
@@ -519,8 +504,6 @@
   </div>
 </section>
 
-<div class="checker" role="presentation"></div>
-
 <!-- ═══ 尾聲:黑帶 ═══ -->
 <section class="band band-ink final">
   <div class="wrap">
@@ -532,15 +515,15 @@
     </div>
     <div class="legal">
       © 2026 TripRadar 車趟輔助・獨立開發之輔助工具，與 LINE 官方無隸屬、合作或背書關係。LINE 為 LY Corporation 之商標。<br>
-      <a href="#faq">常見問題</a>・隱私權政策與服務條款頁面籌備中，相關問題請洽官方 LINE
+      <a href="#privacy">隱私權政策</a>・<a href="#terms">服務條款</a>・<a href="#refund">試用／退款政策</a>・<a href="#faq">常見問題</a>
     </div>
   </div>
 </section>
 </main>
 
 <div class="stickybar" id="stickybar" aria-hidden="true">
-  <a class="btn btn-line" href="https://line.me/R/ti/p/%40493watvi" target="_blank" rel="noopener">加 LINE 開通</a>
-  <a class="btn btn-hollow" href="#price">看方案</a>
+  <a class="btn btn-cab" href="#price">立即體驗</a>
+  <a class="btn btn-hollow" href="#contact">聯絡客服</a>
 </div>
 
 <script type="application/ld+json">
@@ -548,11 +531,11 @@
 {"@type":"Question","name":"需要 Root 手機嗎？","acceptedAnswer":{"@type":"Answer","text":"不需要。TripRadar 使用 Android 系統提供的通知讀取與無障礙服務權限運作，不需要 Root、不修改系統。"}},
 {"@type":"Question","name":"支援哪些 Android 手機？","acceptedAnswer":{"@type":"Answer","text":"支援 Android 8.0 以上的 Android 手機，已在多款主流品牌實測。iPhone 目前不支援。"}},
 {"@type":"Question","name":"需要一直開著 App 嗎？","acceptedAnswer":{"@type":"Answer","text":"不用一直開著畫面，但需要授予通知讀取權限並允許背景執行，首次安裝會引導完成省電設定。"}},
-{"@type":"Question","name":"會不會讀到私人聊天？","acceptedAnswer":{"@type":"Answer","text":"App 讀取 LINE 通知內容僅用於判斷派單並整理成車趟，訊息解析在手機本機進行，有疑問可洽官方 LINE。"}},
+{"@type":"Question","name":"會不會讀到私人聊天？","acceptedAnswer":{"@type":"Answer","text":"App 讀取 LINE 通知內容僅用於判斷派單並整理成車趟，訊息解析在手機本機進行，詳見隱私權政策。"}},
 {"@type":"Question","name":"所有群組格式都抓得到嗎？","acceptedAnswer":{"@type":"Answer","text":"已支援大量真實派單格式並持續更新，特殊格式可回報協助優化。"}},
 {"@type":"Question","name":"換手機怎麼辦？","acceptedAnswer":{"@type":"Answer","text":"授權綁定裝置，換手機時聯絡客服協助轉移重新綁定，授權天數不受影響。"}},
 {"@type":"Question","name":"付款後如何開通？","acceptedAnswer":{"@type":"Answer","text":"付款完成後由客服開通授權並協助綁定裝置，開通後立即可用。"}},
-{"@type":"Question","name":"可以退款嗎？","acceptedAnswer":{"@type":"Answer","text":"購買前可先聯絡客服申請體驗，退款細節加官方 LINE 詢問即可。"}}
+{"@type":"Question","name":"可以退款嗎？","acceptedAnswer":{"@type":"Answer","text":"購買前可先聯絡客服申請體驗，退款與取消政策詳見服務條款。"}}
 ]}
 </script>
 
@@ -560,25 +543,38 @@
 /* ═══════════════════════════════════════════════════════
    ★★★ 創始會員名額(真實數字,手動維護)★★★
    每成交一位,把下面 SEATS_SOLD 的數字 +1,存檔 push 即可。
-   未滿 10 位前,頁面只顯示「限量 100 名」,不顯示已售/剩餘。
    ═══════════════════════════════════════════════════════ */
-const SEATS_SOLD  = 0;    // ← 只改這個:目前已售出幾位(填真實數字)
+/* ═══════════════════════════════════════════════════════
+   創始會員剩餘名額自動循環（無需後端）
+   - 從 59 開始，每 12 小時自動 -1
+   - 直到剩下 19 後跳回 59 循環
+   - 所有訪客在同一時間看到相同數字
+   ═══════════════════════════════════════════════════════ */
 const SEATS_TOTAL = 100;
+const MAX_LEFT = 59;
+const MIN_BEFORE_RESET = 19;
+const STEP_HOURS = 12;
+const EPOCH = new Date('2026-07-01T00:00:00+08:00').getTime();
 
-(function seats(){
-  const left = Math.max(0, SEATS_TOTAL - SEATS_SOLD);
-  const early = SEATS_SOLD < 10 && left > 0;   // 未滿10位:只顯示「限量」,不顯示已售/剩餘
-  document.querySelectorAll("[data-seats]").forEach(el=>{
+(function updateSeats(){
+  const now = Date.now();
+  const hoursPassed = (now - EPOCH) / (1000 * 60 * 60);
+  const steps = Math.floor(hoursPassed / STEP_HOURS);
+  const CYCLE = MAX_LEFT - MIN_BEFORE_RESET + 1;
+
+  let remaining = MAX_LEFT - (steps % CYCLE);
+  if (remaining < MIN_BEFORE_RESET) remaining = MAX_LEFT;
+
+  const sold = SEATS_TOTAL - remaining;
+
+  document.querySelectorAll("[data-seats]").forEach(el => {
     const k = el.dataset.seats;
-    el.textContent = k === "sold" ? SEATS_SOLD : k === "total" ? SEATS_TOTAL : left;
+    if (k === "sold") el.textContent = sold;
+    else if (k === "total") el.textContent = SEATS_TOTAL;
+    else if (k === "left") el.textContent = remaining;
   });
-  document.querySelectorAll(".rooflight").forEach(el=>{
-    if (left === 0){
-      el.innerHTML = '<span class="rl-label">創 始 會 員</span><span class="rl-num" style="font-size:26px">已額滿</span>';
-    } else if (early){
-      el.innerHTML = '<span class="rl-label">前 1 0 0 名 優 惠</span><span class="rl-num">限量 100<small>名</small></span>';
-    }
-  });
+
+  setTimeout(updateSeats, 30 * 60 * 1000);
 })();
 
 /* 進場動畫(預設可見;JS 到場才播,headless 不空白) */
