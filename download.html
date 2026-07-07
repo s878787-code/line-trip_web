@@ -163,17 +163,18 @@
    DOWNLOAD_URL 填上後,下載按鈕自動變成可下載;留空則顯示「準備中」。
    例:GitHub Release 網址,或放到 assets/ 後填 "assets/tripradar.apk"
    ═══════════════════════════════════════════════════════ */
-const DOWNLOAD_URL = "";              // ← APK 上線後填下載網址
-const APK_SIZE     = "";              // ← 選填,例如 "約 18 MB"
+const DOWNLOAD_URL = "https://wnzvbbqaikzxsajqyggg.supabase.co/storage/v1/object/public/app/tripradar-latest.apk";  // 永遠指向最新版(OTA 同一顆),接一次即可
+const APK_SIZE     = "約 1.8 MB";     // 選填
 
 (function download(){
   const btn = document.getElementById("dlBtn");
   const meta = document.getElementById("dlMeta");
   if (DOWNLOAD_URL){
     btn.className = "btn btn-dl";
-    btn.textContent = "⬇ 下載 APK";
+    btn.textContent = "⬇ 下載 App（Android 8.0+）";
     btn.href = DOWNLOAD_URL;
-    btn.setAttribute("download","");
+    btn.setAttribute("download","車趟雷達-司機版.apk");
+    btn.setAttribute("rel","noopener");
   } else {
     btn.className = "btn btn-soon";
     btn.textContent = "維護中，新版本即將開放下載";
