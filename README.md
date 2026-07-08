@@ -4,7 +4,7 @@
 
 # TripRadar 車趟雷達 — 更新公告
 
-職業司機的 AI 接單助手。官方網站:**[s878787-code.github.io/line-trip_web](https://da.gd/ctr)**
+職業司機的 AI 接單助手。官方網站:**[https://da.gd/ctr](https://s878787-code.github.io/line-trip_web)**
 
 有問題或建議,歡迎回饋官方 LINE **@493watvi** —— 我們非常需要您寶貴的意見。
 
