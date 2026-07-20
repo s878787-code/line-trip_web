@@ -101,5 +101,18 @@
     <p class="copy">© 2026 TripRadar 車趟雷達・獨立開發之輔助工具，與 LINE 官方無隸屬、合作或背書關係。LINE 為 LY Corporation 之商標。</p>
   </div>
 </div></article>
+<script>
+/* 官網人次計數(自家 Supabase sitehit,零個資:只送站台代號;同一分頁工作階段只計一次;本機預覽不計) */
+(function(){
+  try{
+    if(location.protocol === "file:" || /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) || /^(192\.168\.|10\.|172\.(1[6-9]|2[0-9]|3[01])\.)/.test(location.hostname)) return;   /* 本機與內網預覽(手機連測試機)都不計 */
+    if(sessionStorage.getItem("tr_hit")) return;
+    sessionStorage.setItem("tr_hit", "1");
+    var u = "https://wnzvbbqaikzxsajqyggg.supabase.co/functions/v1/sitehit";
+    if(navigator.sendBeacon) navigator.sendBeacon(u, "main");
+    else fetch(u, { method:"POST", body:"main", mode:"no-cors", keepalive:true }).catch(function(){});
+  }catch(e){}
+})();
+</script>
 </body>
 </html>
