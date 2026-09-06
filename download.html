@@ -165,7 +165,8 @@
    例:GitHub Release 網址,或放到 assets/ 後填 "assets/tripradar.apk"
    ═══════════════════════════════════════════════════════ */
 const DOWNLOAD_URL = "https://wnzvbbqaikzxsajqyggg.supabase.co/storage/v1/object/public/app/tripradar-latest.apk";  // 永遠指向最新版(OTA 同一顆),接一次即可
-const APK_SIZE     = "約 1.8 MB";     // 選填
+const VERSION_URL  = "https://wnzvbbqaikzxsajqyggg.supabase.co/storage/v1/object/public/app/version.json";        // publish.sh 每次發佈都更新 → 版本號跟著走,不用再手改
+const APK_SIZE     = "約 2.0 MB";     // 備援:線上檔大小抓不到時顯示(正常會用 HEAD 抓實際大小)
 
 (function download(){
   const btn = document.getElementById("dlBtn");
@@ -185,18 +186,38 @@ const APK_SIZE     = "約 1.8 MB";     // 選填
   if (APK_SIZE) meta.innerHTML = 'Android 8.0 以上・APK <b>' + APK_SIZE + '</b>，直接安裝';
 })();
 
-/* 目前版本:抓同源 README 更新紀錄的最新版本號 */
+/* 目前版本 + 檔案大小(0908 改):先抓 Supabase version.json —— publish.sh 每次發佈都更新它,所以永遠是線上最新版;
+   抓不到才退回 README 更新紀錄的最新版號(舊法;README 是手寫公告,曾經停在 v35.8 而 App 已到 v41)。
+   檔案大小用 HEAD 抓 APK 的 content-length(Supabase 公開檔有 CORS *),抓不到才顯示 APK_SIZE 備援。 */
 (async function version(){
+  const chip = document.getElementById("verchip");
+  const meta = document.getElementById("dlMeta");
+  let shown = false;
   try{
-    const r = await fetch("README.md",{cache:"no-store"});
-    if(!r.ok) return;
-    const md = (await r.text()).replace(/\r/g,"").replace(/<!--[\s\S]*?-->/g,"");
-    const sec = md.split(/\n## /).find(s=>s.includes("更新紀錄")) || "";
-    const m = sec.match(/^### (?:🚀\s*)?([Vv][\d.]+)/m);
-    if(!m) return;
-    const chip = document.getElementById("verchip");
-    chip.textContent = "目前版本 " + m[1];
-    chip.hidden = false;
+    const r = await fetch(VERSION_URL,{cache:"no-store"});
+    if(r.ok){
+      const j = await r.json();
+      if(j && j.name){
+        chip.textContent = "目前版本 v" + String(j.name).replace(/^v/i,"");
+        chip.hidden = false; shown = true;
+      }
+    }
+  }catch(e){}
+  if(!shown){
+    try{
+      const r = await fetch("README.md",{cache:"no-store"});
+      if(r.ok){
+        const md = (await r.text()).replace(/\r/g,"").replace(/<!--[\s\S]*?-->/g,"");
+        const sec = md.split(/\n## /).find(s=>s.includes("更新紀錄")) || "";
+        const m = sec.match(/^### (?:🚀\s*)?([Vv][\d.]+)/m);
+        if(m){ chip.textContent = "目前版本 " + m[1]; chip.hidden = false; }
+      }
+    }catch(e){}
+  }
+  try{
+    const h = await fetch(DOWNLOAD_URL,{method:"HEAD",cache:"no-store"});
+    const len = Number(h.headers.get("content-length") || 0);
+    if(len > 0 && meta) meta.innerHTML = 'Android 8.0 以上・APK <b>約 ' + (len/1048576).toFixed(1) + ' MB</b>，直接安裝';
   }catch(e){}
 })();
 </script>
